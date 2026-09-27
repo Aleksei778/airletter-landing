@@ -54,6 +54,12 @@ export function FlightScene() {
   )
 }
 
+/** Keeps a curve parameter in [0, 1) */
+function wrap01(t: number): number {
+  const r = t % 1
+  return r < 0 ? r + 1 : r
+}
+
 type Telemetry = { alt: HTMLElement | null; hdg: HTMLElement | null; sent: HTMLElement | null }
 
 function planeGeometry(THREE: Three) {
@@ -228,13 +234,16 @@ function start(THREE: Three, canvas: HTMLCanvasElement, telemetry: Telemetry): (
   const speedK = reduce ? 0.2 : 1
 
   const tick = (now: number) => {
-    const dt = Math.min((now - last) / 1000, 0.05)
+    // the rAF timestamp is the frame start and can be slightly earlier than
+    // `last` taken from performance.now(); a negative step would push the
+    // curve parameter below 0, where getPointAt reads a missing point
+    const dt = Math.min(Math.max((now - last) / 1000, 0), 0.05)
     last = now
     const scrollBoost = 1 + Math.min(sy / innerHeight, 3) * 0.35
-    u = (u + dt * 0.035 * speedK * scrollBoost) % 1
+    u = wrap01(u + dt * 0.035 * speedK * scrollBoost)
 
     path.getPointAt(u, p)
-    path.getPointAt((u + 0.004) % 1, ahead)
+    path.getPointAt(wrap01(u + 0.004), ahead)
     path.getTangentAt(u, tan)
 
     plane.position.copy(p)
@@ -247,10 +256,10 @@ function start(THREE: Three, canvas: HTMLCanvasElement, telemetry: Telemetry): (
     prevTan.copy(tan)
 
     for (const e of escorts) {
-      e.u = (e.u + dt * e.speed * speedK * scrollBoost) % 1
+      e.u = wrap01(e.u + dt * e.speed * speedK * scrollBoost)
       e.path.getPointAt(e.u, tmp)
       e.mesh.position.copy(tmp)
-      e.path.getPointAt((e.u + 0.01) % 1, tmp)
+      e.path.getPointAt(wrap01(e.u + 0.01), tmp)
       e.mesh.lookAt(tmp)
     }
 
