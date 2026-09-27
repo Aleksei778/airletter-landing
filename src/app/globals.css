@@ -1,26 +1,184 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #000;
+  --color-paper: #fff;
+  --color-mute: #8a8a8a;
+  --color-line: #3a3a3a;
+  --color-deep: #161616;
+
+  --font-head: var(--font-unbounded), system-ui, sans-serif;
+  --font-body: var(--font-inter-tight), system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html,
+  body {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-paper);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    background: var(--color-paper);
+    color: var(--color-ink);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* pill button from the reference: white on black, lifts on hover */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 18px 30px;
+    border-radius: 100px;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s;
+    white-space: nowrap;
+  }
+  .btn:hover {
+    transform: scale(1.04);
+  }
+  .btn:disabled {
+    opacity: 0.5;
+    transform: none;
+    cursor: not-allowed;
+  }
+  .btn svg {
+    transition: transform 0.25s;
+  }
+  .btn:hover svg {
+    transform: translate(3px, -3px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-paper);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+  .btn-ghost:hover {
+    box-shadow: inset 0 0 0 1px var(--color-paper);
+  }
+
+  .btn-sm {
+    padding: 11px 20px;
+    font-size: 14px;
+  }
+
+  .panel {
+    background: rgb(0 0 0 / 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .h-display {
+    font-family: var(--font-head);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+    line-height: 0.9;
+  }
+
+  .h-section {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .lede {
+    color: var(--color-mute);
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  /* long-form text for legal pages */
+  .prose-legal h2 {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    margin: 48px 0 14px;
+  }
+  .prose-legal p,
+  .prose-legal li {
+    color: #bdbdbd;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .prose-legal ul {
+    list-style: none;
+    padding: 0;
+  }
+  .prose-legal li {
+    padding-left: 20px;
+    position: relative;
+  }
+  .prose-legal li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.75em;
+    width: 8px;
+    height: 1px;
+    background: var(--color-mute);
+  }
+  .prose-legal a {
+    color: var(--color-paper);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+/* film grain overlay */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1s steps(4) infinite;
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgb(0 0 0 / 0.85) 100%);
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -1%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
+  html { scroll-behavior: auto; }
 }
