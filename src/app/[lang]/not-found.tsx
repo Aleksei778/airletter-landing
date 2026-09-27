@@ -11,7 +11,7 @@ export default function NotFound() {
       <h1 className="h-display text-[clamp(40px,8vw,112px)]">404</h1>
       <p className="lede mt-6">Сбились с курса · Off course</p>
       <Link href="/" className="btn mt-10">
-        quicksend <Arrow />
+        airletter <Arrow />
       </Link>
     </main>
   )

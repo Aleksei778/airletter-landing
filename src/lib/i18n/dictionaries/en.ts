@@ -2,7 +2,7 @@ import type { Dictionary } from "./ru"
 
 const en: Dictionary = {
   meta: {
-    title: "QuickSend — bulk email from your own Gmail",
+    title: "Airletter — bulk email from your own Gmail",
     description:
       "Personal bulk campaigns right from Gmail: recipients from Google Sheets, scheduled sending, human pacing and statistics in your dashboard.",
   },
@@ -33,9 +33,9 @@ const en: Dictionary = {
     title: "Built for deliverability.",
     items: [
       { title: "Your sender, your reputation", text: "Mail goes through the Gmail API from your account, not a shared server pool that spam filters already know." },
-      { title: "Sheets as the source", text: "Keep the list where your team already works. QuickSend reads the addresses from a Google Sheet at launch." },
+      { title: "Sheets as the source", text: "Keep the list where your team already works. Airletter reads the addresses from a Google Sheet at launch." },
       { title: "Human pacing", text: "Sending is spread over time and stays inside Gmail's daily limits." },
-      { title: "Everything Gmail can do", text: "HTML formatting, attachments, signature — write the email as usual, QuickSend does the rest." },
+      { title: "Everything Gmail can do", text: "HTML formatting, attachments, signature — write the email as usual, Airletter does the rest." },
       { title: "Scheduling", text: "Pick a date and time in your own timezone. A campaign can be cancelled before it finishes." },
       { title: "Dashboard with stats", text: "Status of every campaign, how many letters went out and how many failed — in your dashboard on the website." },
     ],
@@ -70,11 +70,11 @@ const en: Dictionary = {
   faq: {
     title: "FAQ",
     items: [
-      { q: "What do I need to use QuickSend?", a: "A Gmail or Google Workspace account and the Chrome browser with the QuickSend extension installed." },
+      { q: "What do I need to use Airletter?", a: "A Gmail or Google Workspace account and the Chrome browser with the Airletter extension installed." },
       { q: "From what server are my emails sent?", a: "From Gmail's servers, on your behalf via the Gmail API. Every email sent appears in your Sent folder." },
       { q: "How many emails can I send per day?", a: "As many as your plan allows, but no more than Gmail's daily limit: about 500 for a regular account and about 2,000 for Google Workspace. When today's limit is reached, the rest go out the next day automatically." },
-      { q: "Can I send attachments?", a: "Yes. Write the email in Gmail as usual, attach files and press the QuickSend button. Total attachment size is up to 18 MB." },
-      { q: "Does QuickSend read my email?", a: "No. We only request permission to send email on your behalf. QuickSend has no access to your inbox or conversations." },
+      { q: "Can I send attachments?", a: "Yes. Write the email in Gmail as usual, attach files and press the Airletter button. Total attachment size is up to 18 MB." },
+      { q: "Does Airletter read my email?", a: "No. We only request permission to send email on your behalf. Airletter has no access to your inbox or conversations." },
       { q: "How do I cancel and delete my data?", a: "Subscriptions do not renew automatically. To delete your account and all data, contact support — we will do it within 30 days." },
     ],
   },
@@ -83,7 +83,7 @@ const en: Dictionary = {
     text: "Free to start. No card needed.",
   },
   footer: {
-    rights: "QuickSend",
+    rights: "Airletter",
     notAffiliated: "Not affiliated with Google. Gmail is a trademark of Google LLC.",
     privacy: "Privacy",
     terms: "Terms",
@@ -119,7 +119,7 @@ const en: Dictionary = {
     of: "of",
     totals: { campaigns: "Campaigns", recipients: "Recipients", sent: "Sent" },
     campaigns: "Campaigns",
-    empty: "No campaigns yet. Install the extension, open Gmail, write an email and press QuickSend.",
+    empty: "No campaigns yet. Install the extension, open Gmail, write an email and press Airletter.",
     install: "Install the extension",
     columns: { subject: "Subject", status: "Status", progress: "Sent", failed: "Failed", date: "Start" },
     status: {

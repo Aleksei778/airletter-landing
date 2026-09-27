@@ -7,7 +7,11 @@ type LegalDoc = { title: string; updated: string; body: ReactNode }
 
 const UPDATED = { ru: "Обновлено 28 сентября 2026", en: "Updated September 28, 2026" }
 
-const mail = <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>
+const mail = site.supportEmail ? (
+  <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>
+) : (
+  <span>[NEXT_PUBLIC_SUPPORT_EMAIL]</span>
+)
 const policyLink = (text: string) => (
   <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">
     {text}
@@ -27,7 +31,7 @@ export function privacy(locale: Locale): LegalDoc {
       body: (
         <>
           <p>
-            Здесь описано, какие данные собирает QuickSend (сайт и расширение для Chrome), зачем, где они хранятся и
+            Здесь описано, какие данные собирает Airletter (сайт и расширение для Chrome), зачем, где они хранятся и
             как их удалить.
           </p>
 
@@ -49,7 +53,7 @@ export function privacy(locale: Locale): LegalDoc {
           </ul>
 
           <h2>Доступ к данным Google</h2>
-          <p>QuickSend запрашивает только необходимые разрешения:</p>
+          <p>Airletter запрашивает только необходимые разрешения:</p>
           <ul>
             <li>
               <b>Отправка писем от вашего имени</b> (gmail.send) — чтобы отправлять письма кампании с вашего адреса. Мы
@@ -63,7 +67,7 @@ export function privacy(locale: Locale): LegalDoc {
             </li>
           </ul>
           <p>
-            Использование и передача QuickSend информации, полученной через Google API, в любое другое приложение
+            Использование и передача Airletter информации, полученной через Google API, в любое другое приложение
             соответствует {policyLink("Google API Services User Data Policy")}, включая требования Limited Use. В
             частности: данные Google используются только для работы функций, которые вы видите в продукте; не
             используются для рекламы; не продаются; не передаются третьим лицам, кроме случаев, необходимых для работы
@@ -93,7 +97,7 @@ export function privacy(locale: Locale): LegalDoc {
           <h2>Ваши права</h2>
           <ul>
             <li>Запросить копию своих данных или их удаление — напишите на {mail}. Мы выполним запрос в течение 30 дней.</li>
-            <li>Отозвать доступ QuickSend к аккаунту Google в любой момент: {permissionsLink}.</li>
+            <li>Отозвать доступ Airletter к аккаунту Google в любой момент: {permissionsLink}.</li>
           </ul>
 
           <h2>Контакты</h2>
@@ -112,7 +116,7 @@ export function privacy(locale: Locale): LegalDoc {
     body: (
       <>
         <p>
-          This policy explains what data QuickSend (the website and the Chrome extension) collects, why, where it is
+          This policy explains what data Airletter (the website and the Chrome extension) collects, why, where it is
           stored and how to delete it.
         </p>
 
@@ -131,7 +135,7 @@ export function privacy(locale: Locale): LegalDoc {
         </ul>
 
         <h2>Access to Google data</h2>
-        <p>QuickSend only requests the permissions it needs:</p>
+        <p>Airletter only requests the permissions it needs:</p>
         <ul>
           <li>
             <b>Send email on your behalf</b> (gmail.send) — to send campaign emails from your address. We do not read,
@@ -145,9 +149,9 @@ export function privacy(locale: Locale): LegalDoc {
           </li>
         </ul>
         <p>
-          QuickSend&apos;s use and transfer of information received from Google APIs to any other app will adhere to{" "}
+          Airletter&apos;s use and transfer of information received from Google APIs to any other app will adhere to{" "}
           {policyLink("Google API Services User Data Policy")}, including the Limited Use requirements. In particular,
-          Google user data is only used to provide user-facing features of QuickSend; is never used for advertising;
+          Google user data is only used to provide user-facing features of Airletter; is never used for advertising;
           is never sold; is not transferred to third parties except as necessary to provide the service or required by
           law; is not read by humans without your explicit consent, except for security purposes or to comply with the
           law; and is not used to train generalized AI models.
@@ -174,7 +178,7 @@ export function privacy(locale: Locale): LegalDoc {
         <h2>Your rights</h2>
         <ul>
           <li>Request a copy of your data or its deletion — email {mail}. We handle requests within 30 days.</li>
-          <li>Revoke QuickSend&apos;s access to your Google account at any time: {permissionsLink}.</li>
+          <li>Revoke Airletter&apos;s access to your Google account at any time: {permissionsLink}.</li>
         </ul>
 
         <h2>Contact</h2>
@@ -194,13 +198,13 @@ export function terms(locale: Locale): LegalDoc {
       body: (
         <>
           <p>
-            Используя QuickSend, вы принимаете эти условия. Они являются публичной офертой на оказание услуг по
+            Используя Airletter, вы принимаете эти условия. Они являются публичной офертой на оказание услуг по
             предоставлению доступа к сервису.
           </p>
 
           <h2>Сервис</h2>
           <p>
-            QuickSend — расширение для Chrome и личный кабинет на сайте, которые позволяют отправлять рассылки из
+            Airletter — расширение для Chrome и личный кабинет на сайте, которые позволяют отправлять рассылки из
             вашего аккаунта Gmail через Gmail API. Письма уходят с вашего адреса и подчиняются правилам и лимитам
             Google.
           </p>
@@ -261,11 +265,11 @@ export function terms(locale: Locale): LegalDoc {
     updated: UPDATED.en,
     body: (
       <>
-        <p>By using QuickSend you agree to these terms.</p>
+        <p>By using Airletter you agree to these terms.</p>
 
         <h2>The service</h2>
         <p>
-          QuickSend is a Chrome extension and a web dashboard that let you send campaigns from your Gmail account via
+          Airletter is a Chrome extension and a web dashboard that let you send campaigns from your Gmail account via
           the Gmail API. Emails are sent from your address and are subject to Google&apos;s rules and limits.
         </p>
 

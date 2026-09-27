@@ -1,11 +1,11 @@
 import Link from "next/link"
 
-/** Wordmark: "quicksend" in Unbounded with a folded paper plane */
+/** Wordmark: "airletter" in Unbounded with a folded paper plane */
 export function Logo({ href, className = "" }: { href: string; className?: string }) {
   return (
-    <Link href={href} className={`inline-flex items-center gap-2 ${className}`} aria-label="QuickSend">
+    <Link href={href} className={`inline-flex items-center gap-2 ${className}`} aria-label="Airletter">
       <PlaneMark className="h-[18px] w-[18px]" />
-      <span className="font-head text-[15px] font-medium tracking-[-0.02em]">quicksend</span>
+      <span className="font-head text-[15px] font-medium tracking-[-0.02em]">airletter</span>
     </Link>
   )
 }
