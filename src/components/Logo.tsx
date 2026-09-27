@@ -12,12 +12,11 @@ export function Logo({ href, className = "" }: { href: string; className?: strin
 
 export function PlaneMark({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      {/* wing */}
-      <path d="M2.5 10.8 21.5 3 15.2 20.5l-4.3-6.4L2.5 10.8Z" fill="currentColor" />
-      {/* inner fold shown as a cut */}
-      <path d="M21.5 3 10.9 14.1" stroke="var(--color-ink, #000)" strokeWidth="1.3" />
-      <path d="m10.9 14.1-.7 5.2 3-3.3" fill="currentColor" />
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      {/* same drawing as app/icon.svg: two wings split by the fold, keel in shadow */}
+      <path d="M2 10.4 22 2 9.4 13.3Z" />
+      <path d="M22 2 11 14.6 15.6 21.6Z" />
+      <path d="M11 14.6 10.2 20.6 13.3 18.1Z" opacity="0.55" />
     </svg>
   )
 }
