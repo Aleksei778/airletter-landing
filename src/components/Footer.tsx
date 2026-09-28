@@ -16,9 +16,11 @@ export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
         <Link href={`/${locale}/terms`} className="transition-colors hover:text-paper">
           {t.footer.terms}
         </Link>
-        <a href={`mailto:${site.supportEmail}`} className="transition-colors hover:text-paper">
-          {t.footer.contact}
-        </a>
+        {site.supportEmail && (
+          <a href={`mailto:${site.supportEmail}`} className="transition-colors hover:text-paper">
+            {t.footer.contact}
+          </a>
+        )}
       </nav>
       <span>{t.footer.notAffiliated}</span>
     </footer>
