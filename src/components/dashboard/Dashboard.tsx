@@ -123,9 +123,9 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
           )}
           <div>
             <h1 className="font-head text-[clamp(24px,3vw,36px)] font-medium tracking-[-0.03em]">
-              {[me.first_name, me.last_name].filter(Boolean).join(" ") || me.email || me.phone}
+              {[me.first_name, me.last_name].filter(Boolean).join(" ") || me.email}
             </h1>
-            <p className="mt-1 text-mute">{me.email || me.phone}</p>
+            <p className="mt-1 text-mute">{me.email}</p>
           </div>
         </div>
 

@@ -53,7 +53,6 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 
 export type Me = {
   email: string
-  phone: string
   first_name: string
   last_name: string
   picture_url: string
@@ -88,10 +87,10 @@ export type CreatedPayment = { payment_id: string; confirmation_url: string }
 export type GmailStatus = { connected: boolean; email: string }
 
 export const api = {
-  // sign in with an email or phone number + password; the backend sets httpOnly cookies
-  register: (body: { login: string; password: string; name?: string }) =>
+  // sign in with an email + password; the backend sets httpOnly cookies
+  register: (body: { email: string; password: string; name?: string }) =>
     request<unknown>("/auth/register", { method: "POST", body: JSON.stringify(body) }),
-  login: (body: { login: string; password: string }) =>
+  login: (body: { email: string; password: string }) =>
     request<unknown>("/auth/login", { method: "POST", body: JSON.stringify(body) }),
 
   gmail: () => request<GmailStatus>("/integrations/google"),

@@ -43,14 +43,14 @@ export function LoginPanel({ locale, t, initialMode = "signin", next }: Props) {
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = new FormData(e.currentTarget)
-    const login = String(form.get("login") ?? "")
+    const email = String(form.get("email") ?? "")
     const password = String(form.get("password") ?? "")
 
     setBusy(true)
     setError(null)
     try {
-      if (mode === "signup") await api.register({ login, password, name: String(form.get("name") ?? "") })
-      else await api.login({ login, password })
+      if (mode === "signup") await api.register({ email, password, name: String(form.get("name") ?? "") })
+      else await api.login({ email, password })
       go()
     } catch (err) {
       const code = err instanceof ApiError ? err.code : undefined
@@ -79,13 +79,13 @@ export function LoginPanel({ locale, t, initialMode = "signin", next }: Props) {
           </label>
         )}
         <label className="block">
-          <span className="text-[13px] text-mute">{t.login}</span>
+          <span className="text-[13px] text-mute">{t.email}</span>
           <input
-            name="login"
+            name="email"
+            type="email"
             required
-            autoComplete="username"
-            inputMode="email"
-            placeholder={t.loginPlaceholder}
+            autoComplete="email"
+            placeholder={t.emailPlaceholder}
             className={field}
           />
         </label>
