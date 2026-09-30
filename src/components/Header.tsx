@@ -2,6 +2,7 @@ import Link from "next/link"
 
 import type { Dictionary, Locale } from "@/lib/i18n"
 
+import { AccountLink } from "./AccountLink"
 import { LangSwitch } from "./LangSwitch"
 import { Logo } from "./Logo"
 
@@ -25,9 +26,7 @@ export function Header({ locale, t }: { locale: Locale; t: Dictionary }) {
           {t.nav.faq}
         </Link>
         <LangSwitch locale={locale} label={t.lang.label} text={t.lang.switchTo} />
-        <Link href={`${home}/login`} className="opacity-100">
-          {t.nav.login}
-        </Link>
+        <AccountLink locale={locale} login={t.nav.login} dashboard={t.nav.dashboard} />
       </nav>
     </header>
   )
