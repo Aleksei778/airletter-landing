@@ -11,7 +11,7 @@ import type { Dictionary } from "@/lib/i18n/dictionaries/ru"
 const POLL_MS = 2_000
 const MAX_POLLS = 60
 
-/** Polls the payment after returning from YooKassa/PayPal until the webhook settles it */
+/** Polls the payment after returning from YooKassa/Stripe until the webhook settles it */
 export function PaymentResult({ locale, t, paymentId }: { locale: Locale; t: Dictionary["payment"]; paymentId?: string }) {
   const [status, setStatus] = useState<PaymentStatus | "unknown">(paymentId ? "pending" : "unknown")
 

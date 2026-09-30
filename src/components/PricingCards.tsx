@@ -91,7 +91,7 @@ export function PricingCards({ locale, t }: Props) {
       </div>
 
       <p className="mt-10 text-sm text-mute">
-        {t.payWith}: <span className="text-paper">{t.yookassa}</span> · <span className="text-paper">{t.paypal}</span>
+        {t.payWith}: <span className="text-paper">{t.yookassa}</span> · <span className="text-paper">{t.stripe}</span>
       </p>
     </div>
   )

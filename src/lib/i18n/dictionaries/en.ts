@@ -44,7 +44,7 @@ const en: Dictionary = {
   },
   pricing: {
     title: "Pricing",
-    lede: "Start free: 10 days and 50 emails a day. Pay by card via YooKassa or with PayPal.",
+    lede: "Start free: 10 days and 50 emails a day. Pay via YooKassa (Russian cards, SBP) or Stripe (international cards).",
     monthly: "Monthly",
     yearly: "Yearly",
     yearlyBadge: "−20%",
@@ -64,7 +64,7 @@ const en: Dictionary = {
     },
     payWith: "Payment methods",
     yookassa: "YooKassa — Russian cards, SBP",
-    paypal: "PayPal — international cards",
+    stripe: "Stripe — international cards",
     more: "Pricing details",
   },
   faq: {
@@ -169,6 +169,7 @@ const en: Dictionary = {
     provider: "Payment method",
     pay: "Pay",
     payError: "Could not create the payment. Please try later.",
+    payUnavailable: "Payments are temporarily unavailable. Please contact support.",
   },
   payment: {
     title: "Payment",

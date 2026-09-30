@@ -3,14 +3,14 @@
 export type PlanId = "trial" | "standard" | "premium"
 export type PaidPlanId = Exclude<PlanId, "trial">
 export type Period = "month" | "year"
-export type Provider = "yookassa" | "paypal"
+export type Provider = "yookassa" | "stripe"
 export type Currency = "RUB" | "USD"
 
 export const YEARLY_DISCOUNT = 0.2
 
 export const providerCurrency: Record<Provider, Currency> = {
   yookassa: "RUB",
-  paypal: "USD",
+  stripe: "USD",
 }
 
 export type Plan = {
@@ -48,7 +48,8 @@ export function formatPrice(value: number, currency: Currency, locale: string): 
   return new Intl.NumberFormat(locale === "ru" ? "ru-RU" : "en-US", {
     style: "currency",
     currency,
+    // whole amounts without decimals, otherwise always two: 12 $, 9,60 $
     maximumFractionDigits: currency === "RUB" ? 0 : 2,
-    minimumFractionDigits: 0,
+    minimumFractionDigits: Number.isInteger(value) ? 0 : 2,
   }).format(value)
 }

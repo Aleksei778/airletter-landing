@@ -51,7 +51,7 @@ export function privacy(locale: Locale): LegalDoc {
             </li>
             <li>
               Данные об оплате: тариф, сумма, статус платежа. Данные карт мы не получаем и не храним — платежи
-              обрабатывают ЮKassa и PayPal.
+              обрабатывают ЮKassa и Stripe.
             </li>
             <li>Технические журналы сервера (IP-адрес, время запроса) — для безопасности и диагностики.</li>
           </ul>
@@ -82,7 +82,7 @@ export function privacy(locale: Locale): LegalDoc {
           <h2>Кому мы передаём данные</h2>
           <p>
             Мы не продаём данные и не передаём их рекламным платформам. Данные обрабатывают только поставщики, без
-            которых сервис не работает: хостинг-провайдер, Google (отправка писем через Gmail API), ЮKassa и PayPal
+            которых сервис не работает: хостинг-провайдер, Google (отправка писем через Gmail API), ЮKassa и Stripe
             (приём платежей).
           </p>
 
@@ -137,7 +137,7 @@ export function privacy(locale: Locale): LegalDoc {
           <li>Campaign data: subject, body, attachments, recipient addresses and delivery statuses.</li>
           <li>
             Payment data: plan, amount, payment status. We never receive or store card details — payments are
-            processed by YooKassa and PayPal.
+            processed by YooKassa and Stripe.
           </li>
           <li>Server logs (IP address, request time) — for security and troubleshooting.</li>
         </ul>
@@ -168,7 +168,7 @@ export function privacy(locale: Locale): LegalDoc {
         <h2>Who we share data with</h2>
         <p>
           We do not sell data or share it with advertising platforms. Data is processed only by providers the service
-          cannot work without: our hosting provider, Google (sending via the Gmail API), YooKassa and PayPal (payments).
+          cannot work without: our hosting provider, Google (sending via the Gmail API), YooKassa and Stripe (payments).
         </p>
 
         <h2>Storage and security</h2>
@@ -235,7 +235,7 @@ export function terms(locale: Locale): LegalDoc {
           <ul>
             <li>Пробный период — 10 дней, до 50 писем в день, бесплатно.</li>
             <li>
-              Платные тарифы оплачиваются заранее за месяц или за год через ЮKassa или PayPal. Автоматического
+              Платные тарифы оплачиваются заранее за месяц или за год через ЮKassa или Stripe. Автоматического
               продления нет.
             </li>
             <li>
@@ -294,7 +294,7 @@ export function terms(locale: Locale): LegalDoc {
         <h2>Plans and payment</h2>
         <ul>
           <li>The trial lasts 10 days with up to 50 emails a day, free of charge.</li>
-          <li>Paid plans are prepaid for a month or a year via YooKassa or PayPal. They do not renew automatically.</li>
+          <li>Paid plans are prepaid for a month or a year via YooKassa or Stripe. They do not renew automatically.</li>
           <li>
             Actual daily volume is capped by Gmail limits: about 500 emails for a regular account and about 2,000 for
             Google Workspace.
