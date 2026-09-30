@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 
 import type { Locale } from "@/lib/i18n/config"
+import { sellerLine } from "@/lib/seller"
 import { site } from "@/lib/site"
 
 type LegalDoc = { title: string; updated: string; body: ReactNode }
@@ -107,7 +108,7 @@ export function privacy(locale: Locale): LegalDoc {
           <h2>Контакты</h2>
           <p>
             По вопросам обработки данных: {mail}.
-            {site.legalEntity && <> Оператор: {site.legalEntity}.</>}
+            {sellerLine() && <> Оператор персональных данных: {sellerLine()}.</>}
           </p>
         </>
       ),
@@ -191,7 +192,7 @@ export function privacy(locale: Locale): LegalDoc {
 
         <h2>Contact</h2>
         <p>
-          Data protection questions: {mail}.{site.legalEntity && <> Operator: {site.legalEntity}.</>}
+          Data protection questions: {mail}.
         </p>
       </>
     ),
@@ -261,7 +262,7 @@ export function terms(locale: Locale): LegalDoc {
           <h2>Контакты</h2>
           <p>
             {mail}
-            {site.legalEntity && <>. Исполнитель: {site.legalEntity}</>}
+            {sellerLine() && <>. Исполнитель: {sellerLine()}</>}
           </p>
         </>
       ),
@@ -318,7 +319,6 @@ export function terms(locale: Locale): LegalDoc {
         <h2>Contact</h2>
         <p>
           {mail}
-          {site.legalEntity && <>. Provider: {site.legalEntity}</>}
         </p>
       </>
     ),
