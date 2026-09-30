@@ -36,7 +36,8 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     })
 
   let res = await doFetch()
-  if (res.status === 401 && (await refreshSession())) {
+  // a 401 from sign-in means wrong credentials, not an expired session
+  if (res.status === 401 && !path.startsWith("/auth/") && (await refreshSession())) {
     res = await doFetch()
   }
 
@@ -52,6 +53,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 
 export type Me = {
   email: string
+  phone: string
   first_name: string
   last_name: string
   picture_url: string
@@ -83,7 +85,18 @@ export type PaymentStatus = "pending" | "succeeded" | "canceled"
 
 export type CreatedPayment = { payment_id: string; confirmation_url: string }
 
+export type GmailStatus = { connected: boolean; email: string }
+
 export const api = {
+  // sign in with an email or phone number + password; the backend sets httpOnly cookies
+  register: (body: { login: string; password: string; name?: string }) =>
+    request<unknown>("/auth/register", { method: "POST", body: JSON.stringify(body) }),
+  login: (body: { login: string; password: string }) =>
+    request<unknown>("/auth/login", { method: "POST", body: JSON.stringify(body) }),
+
+  gmail: () => request<GmailStatus>("/integrations/google"),
+  disconnectGmail: () => request<GmailStatus>("/integrations/google", { method: "DELETE" }),
+
   me: () => request<Me>("/me"),
   subscription: () => request<Subscription>("/subscription/current"),
   campaigns: (limit = 50) => request<{ campaigns: Campaign[] }>(`/campaigns?limit=${limit}`),
@@ -95,5 +108,8 @@ export const api = {
   payment: (id: string) => request<{ status: PaymentStatus; plan: PlanId; period: Period }>(`/payments/${id}`),
 }
 
-/** Google sign-in starts with a full-page navigation, not fetch */
-export const googleLoginUrl = "/api/auth/google/login?source=website"
+/** Connecting Gmail is a full-page navigation to Google's consent screen */
+export const gmailConnectUrl = "/api/integrations/google/connect"
+
+/** Set by the backend next to the httpOnly session cookies; readable by JS */
+export const SESSION_MARKER_COOKIE = "al_session"

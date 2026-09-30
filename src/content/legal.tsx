@@ -37,7 +37,11 @@ export function privacy(locale: Locale): LegalDoc {
 
           <h2>Какие данные мы получаем</h2>
           <ul>
-            <li>Данные аккаунта Google: адрес почты, имя, фото профиля — при входе через Google.</li>
+            <li>
+              Данные аккаунта: email или номер телефона и имя. Пароль хранится только в виде необратимого хеша
+              (bcrypt).
+            </li>
+            <li>Данные подключённого аккаунта Google: адрес Gmail, имя, фото профиля — когда вы подключаете Gmail.</li>
             <li>
               Токены доступа Google. Хранятся в зашифрованном виде и используются только для отправки писем и чтения
               выбранных вами таблиц.
@@ -63,7 +67,7 @@ export function privacy(locale: Locale): LegalDoc {
               <b>Чтение Google Таблиц</b> — чтобы получить адреса получателей из таблицы, которую вы указали.
             </li>
             <li>
-              <b>Базовый профиль</b> (email, имя) — чтобы создать ваш аккаунт.
+              <b>Базовый профиль Google</b> (email, имя) — чтобы показать, с какого адреса уходят письма.
             </li>
           </ul>
           <p>
@@ -122,7 +126,11 @@ export function privacy(locale: Locale): LegalDoc {
 
         <h2>Data we receive</h2>
         <ul>
-          <li>Google account data: email address, name, profile picture — when you sign in with Google.</li>
+          <li>
+            Account data: email address or phone number and name. Passwords are stored only as an irreversible hash
+            (bcrypt).
+          </li>
+          <li>Connected Google account data: Gmail address, name, profile picture — when you connect Gmail.</li>
           <li>
             Google access tokens. Stored encrypted and used only to send email and read the spreadsheets you select.
           </li>
@@ -145,7 +153,7 @@ export function privacy(locale: Locale): LegalDoc {
             <b>Read Google Sheets</b> — to load recipient addresses from the spreadsheet you point to.
           </li>
           <li>
-            <b>Basic profile</b> (email, name) — to create your account.
+            <b>Basic Google profile</b> (email, name) — to show which address your emails are sent from.
           </li>
         </ul>
         <p>

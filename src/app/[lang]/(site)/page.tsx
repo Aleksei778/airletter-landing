@@ -27,7 +27,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <div className="mt-10 flex flex-wrap items-end justify-between gap-8">
           <p className="max-w-[36ch] text-[clamp(16px,1.4vw,19px)] leading-normal text-mute">{t.hero.text}</p>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <Link href={`/${lang}/login`} className="btn btn-ghost">
+            <Link href={`/${lang}/login?mode=signup`} className="btn btn-ghost">
               {t.hero.start}
             </Link>
             <a href={site.extensionUrl} target="_blank" rel="noopener" className="btn">
@@ -117,7 +117,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <h2 className="h-display mx-auto max-w-[12ch] text-[clamp(40px,8vw,120px)]">{t.cta.title}</h2>
         <p className="lede mt-7 mb-11">{t.cta.text}</p>
         <div className="flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
-          <Link href={`/${lang}/login`} className="btn btn-ghost">
+          <Link href={`/${lang}/login?mode=signup`} className="btn btn-ghost">
             {t.hero.start}
           </Link>
           <a href={site.extensionUrl} target="_blank" rel="noopener" className="btn">
