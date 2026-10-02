@@ -14,20 +14,25 @@ import {
   totalPrice,
   type PaidPlanId,
   type Period,
+  type PlanId,
   type Provider,
 } from "@/lib/plans"
 
 type Props = {
   locale: Locale
   t: Dictionary
+  /** plans the backend allows buying now; never empty */
+  purchasable: PaidPlanId[]
+  /** the active plan: buying it again is a renewal */
+  current: PlanId | null
   initialPlan?: PaidPlanId
   initialPeriod?: Period
 }
 
-const paidPlans = plans.filter((p) => p.id !== "trial")
-
-export function Checkout({ locale, t, initialPlan, initialPeriod }: Props) {
-  const [plan, setPlan] = useState<PaidPlanId>(initialPlan ?? "standard")
+export function Checkout({ locale, t, purchasable, current, initialPlan, initialPeriod }: Props) {
+  const paidPlans = plans.filter((p) => purchasable.includes(p.id as PaidPlanId))
+  const [chosenPlan, setPlan] = useState<PaidPlanId | undefined>(initialPlan)
+  const plan = chosenPlan && purchasable.includes(chosenPlan) ? chosenPlan : purchasable[0]
   const [period, setPeriod] = useState<Period>(initialPeriod ?? "month")
   // enabled on the backend; null while loading
   const [available, setAvailable] = useState<Provider[] | null>(null)
@@ -72,7 +77,7 @@ export function Checkout({ locale, t, initialPlan, initialPeriod }: Props) {
   return (
     <div ref={ref} className="mt-10 grid gap-10 md:grid-cols-[2fr_1fr]">
       <div className="space-y-9">
-        <Group legend={t.dashboard.plan} className="grid gap-3 sm:grid-cols-2">
+        <Group legend={t.dashboard.plan} className={`grid gap-3 ${paidPlans.length > 1 ? "sm:grid-cols-2" : "sm:max-w-[calc(50%-6px)]"}`}>
           {paidPlans.map((p) => (
             <button
               key={p.id}
@@ -85,7 +90,10 @@ export function Checkout({ locale, t, initialPlan, initialPeriod }: Props) {
                 <span className="font-head text-lg font-medium tracking-[-0.03em]">{t.pricing.plans[p.id].name}</span>
                 <Dot />
               </span>
-              <span className="mt-6 block text-sm text-mute">
+              <span className="mt-1 block h-4 text-[12px] text-mute">
+                {p.id === current ? t.dashboard.renew : current && current !== "trial" ? t.dashboard.upgradeNow : ""}
+              </span>
+              <span className="mt-4 block text-sm text-mute">
                 {p.dailyLimit.toLocaleString(locale)} {t.pricing.perDay}
               </span>
               <span className="mt-1 block text-sm">

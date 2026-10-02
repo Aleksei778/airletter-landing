@@ -234,7 +234,7 @@ export function terms(locale: Locale): LegalDoc {
 
           <h2>Тарифы и оплата</h2>
           <ul>
-            <li>Пробный период — 10 дней, до 50 писем в день, бесплатно.</li>
+            <li>Пробный период — 10 дней, до 30 писем в день, бесплатно. Импорт из Google Таблиц на пробном периоде недоступен, а в письма добавляется строка «Разослано с помощью Airletter».</li>
             <li>
               Платные тарифы оплачиваются заранее за месяц или за год через ЮKassa или Stripe. Автоматического
               продления нет.
@@ -294,7 +294,7 @@ export function terms(locale: Locale): LegalDoc {
 
         <h2>Plans and payment</h2>
         <ul>
-          <li>The trial lasts 10 days with up to 50 emails a day, free of charge.</li>
+          <li>The trial lasts 10 days with up to 30 emails a day, free of charge. Google Sheets import is not available on the trial, and emails carry a &ldquo;Sent with Airletter&rdquo; line.</li>
           <li>Paid plans are prepaid for a month or a year via YooKassa or Stripe. They do not renew automatically.</li>
           <li>
             Actual daily volume is capped by Gmail limits: about 500 emails for a regular account and about 2,000 for

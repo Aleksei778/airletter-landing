@@ -74,11 +74,12 @@ export function PricingCards({ locale, t }: Props) {
                   <b className="font-medium">{plan.dailyLimit.toLocaleString(locale)}</b>{" "}
                   <span className="text-mute">{t.perDay}</span>
                 </li>
-                {t.features.common.map((f) => (
+                {[...(isFree ? [] : t.features.paid), ...t.features.common].map((f) => (
                   <li key={f} className="text-mute">
                     {f}
                   </li>
                 ))}
+                {isFree && <li className="text-mute">{t.features.trialFooter}</li>}
                 {plan.id === "premium" && <li className="text-mute">{t.features.priority}</li>}
               </ul>
 
