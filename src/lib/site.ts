@@ -6,6 +6,11 @@ export const site = {
   extensionUrl: process.env.NEXT_PUBLIC_EXTENSION_URL ?? "https://chromewebstore.google.com/",
   // must be set before launch: legal pages and the footer point to it
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "",
-  // Seller details are required on the site by YooKassa and PayPal
-  legalEntity: process.env.NEXT_PUBLIC_LEGAL_ENTITY ?? "",
+  // Seller details YooKassa requires on the site (Russian version):
+  // full name, INN and tax status of the self-employed person
+  seller: {
+    name: process.env.NEXT_PUBLIC_SELLER_NAME ?? "",
+    inn: process.env.NEXT_PUBLIC_SELLER_INN ?? "",
+    status: process.env.NEXT_PUBLIC_SELLER_STATUS ?? "самозанятый, плательщик НПД",
+  },
 }
