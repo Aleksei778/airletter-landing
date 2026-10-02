@@ -39,7 +39,7 @@ export function privacy(locale: Locale): LegalDoc {
           <h2>Какие данные мы получаем</h2>
           <ul>
             <li>
-              Данные аккаунта: email или номер телефона и имя. Пароль хранится только в виде необратимого хеша
+              Данные аккаунта: email и имя. Пароль хранится только в виде необратимого хеша
               (bcrypt).
             </li>
             <li>Данные подключённого аккаунта Google: адрес Gmail, имя, фото профиля — когда вы подключаете Gmail.</li>
@@ -128,7 +128,7 @@ export function privacy(locale: Locale): LegalDoc {
         <h2>Data we receive</h2>
         <ul>
           <li>
-            Account data: email address or phone number and name. Passwords are stored only as an irreversible hash
+            Account data: email address and name. Passwords are stored only as an irreversible hash
             (bcrypt).
           </li>
           <li>Connected Google account data: Gmail address, name, profile picture — when you connect Gmail.</li>
