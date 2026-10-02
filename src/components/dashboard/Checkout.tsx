@@ -8,6 +8,7 @@ import type { Locale } from "@/lib/i18n/config"
 import type { Dictionary } from "@/lib/i18n/dictionaries/ru"
 import {
   formatPrice,
+  monthlyPrice,
   plans,
   providerCurrency,
   totalPrice,
@@ -68,43 +69,68 @@ export function Checkout({ locale, t, initialPlan, initialPeriod }: Props) {
     }
   }
 
-  const option = (active: boolean) =>
-    `rounded-full px-5 py-2.5 text-sm transition-colors ${
-      active ? "bg-paper text-ink" : "text-mute shadow-[inset_0_0_0_1px_var(--color-line)] hover:text-paper"
-    }`
-
   return (
     <div ref={ref} className="mt-10 grid gap-10 md:grid-cols-[2fr_1fr]">
-      <div className="space-y-8">
-        <Fieldset legend={t.dashboard.plan}>
+      <div className="space-y-9">
+        <Group legend={t.dashboard.plan} className="grid gap-3 sm:grid-cols-2">
           {paidPlans.map((p) => (
             <button
               key={p.id}
               role="radio"
               aria-checked={plan === p.id}
               onClick={() => setPlan(p.id as PaidPlanId)}
-              className={option(plan === p.id)}
+              className="group rounded-2xl p-5 text-left shadow-[inset_0_0_0_1px_var(--color-line)] transition-shadow hover:shadow-[inset_0_0_0_1px_var(--color-mute)] aria-checked:shadow-[inset_0_0_0_1px_var(--color-paper)]"
             >
-              {t.pricing.plans[p.id].name} · {p.dailyLimit.toLocaleString(locale)} {t.pricing.perDay}
+              <span className="flex items-center justify-between gap-4">
+                <span className="font-head text-lg font-medium tracking-[-0.03em]">{t.pricing.plans[p.id].name}</span>
+                <Dot />
+              </span>
+              <span className="mt-6 block text-sm text-mute">
+                {p.dailyLimit.toLocaleString(locale)} {t.pricing.perDay}
+              </span>
+              <span className="mt-1 block text-sm">
+                {formatPrice(monthlyPrice(p, currency, period), currency, locale)}
+                <span className="text-mute">{t.pricing.perMonth}</span>
+              </span>
             </button>
           ))}
-        </Fieldset>
+        </Group>
 
-        <Fieldset legend={t.pricing.monthly + " / " + t.pricing.yearly}>
+        <Group legend={t.pricing.monthly + " / " + t.pricing.yearly} className="flex gap-8 border-b border-line">
           {(["month", "year"] as const).map((p) => (
-            <button key={p} role="radio" aria-checked={period === p} onClick={() => setPeriod(p)} className={option(period === p)}>
-              {p === "month" ? t.pricing.monthly : `${t.pricing.yearly} ${t.pricing.yearlyBadge}`}
+            <button
+              key={p}
+              role="radio"
+              aria-checked={period === p}
+              onClick={() => setPeriod(p)}
+              className="-mb-px border-b border-transparent pb-3 text-sm text-mute transition-colors hover:text-paper aria-checked:border-paper aria-checked:text-paper"
+            >
+              {p === "month" ? (
+                t.pricing.monthly
+              ) : (
+                <>
+                  {t.pricing.yearly} <span className="ml-1 text-mute">{t.pricing.yearlyBadge}</span>
+                </>
+              )}
             </button>
           ))}
-        </Fieldset>
+        </Group>
 
-        <Fieldset legend={t.dashboard.provider}>
+        <Group legend={t.dashboard.provider} className="grid gap-1">
           {(available ?? []).map((p) => (
-            <button key={p} role="radio" aria-checked={provider === p} onClick={() => setChosen(p)} className={option(provider === p)}>
-              {p === "yookassa" ? t.pricing.yookassa : t.pricing.stripe}
+            <button
+              key={p}
+              role="radio"
+              aria-checked={provider === p}
+              onClick={() => setChosen(p)}
+              className="group -mx-3 flex items-center gap-4 rounded-xl px-3 py-3 text-left text-sm text-mute transition-colors hover:bg-deep hover:text-paper aria-checked:text-paper"
+            >
+              <Dot />
+              <span className="flex-1">{p === "yookassa" ? t.pricing.yookassa : t.pricing.stripe}</span>
+              <span className="text-[13px] text-mute">{providerCurrency[p]}</span>
             </button>
           ))}
-        </Fieldset>
+        </Group>
       </div>
 
       <div className="flex flex-col justify-end border-t border-line pt-8 md:border-t-0 md:border-l md:pt-0 md:pl-10">
@@ -131,13 +157,23 @@ export function Checkout({ locale, t, initialPlan, initialPeriod }: Props) {
   )
 }
 
-function Fieldset({ legend, children }: { legend: string; children: React.ReactNode }) {
+function Group({ legend, className, children }: { legend: string; className: string; children: React.ReactNode }) {
   return (
     <fieldset>
-      <legend className="mb-3 text-[13px] text-mute">{legend}</legend>
-      <div role="radiogroup" className="flex flex-wrap gap-2">
+      <legend className="mb-4 text-[13px] text-mute">{legend}</legend>
+      <div role="radiogroup" className={className}>
         {children}
       </div>
     </fieldset>
+  )
+}
+
+/** Radio indicator: an outlined circle, with a dot when the parent is checked */
+function Dot() {
+  return (
+    <span
+      aria-hidden="true"
+      className="size-4 shrink-0 rounded-full shadow-[inset_0_0_0_1.5px_var(--color-line)] transition-shadow group-hover:shadow-[inset_0_0_0_1.5px_var(--color-mute)] group-aria-checked:shadow-[inset_0_0_0_1.5px_var(--color-paper),inset_0_0_0_4.5px_var(--color-ink),inset_0_0_0_8px_var(--color-paper)]"
+    />
   )
 }

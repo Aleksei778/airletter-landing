@@ -176,7 +176,7 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
         {campaigns.length === 0 ? (
           <div className="mt-10 border-t border-line pt-10">
             <p className="lede max-w-[52ch]">{d.empty}</p>
-            <a href={site.extensionUrl} target="_blank" rel="noopener" className="btn mt-8">
+            <a href={site.extensionUrl} target="_blank" rel="noopener" className="btn btn-ghost mt-8">
               {d.install} <Arrow />
             </a>
           </div>
@@ -250,14 +250,12 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
 
 function StatusBadge({ status, label }: { status: Campaign["status"]; label: string }) {
   const style =
-    status === "sending"
-      ? "bg-paper text-ink"
-      : status === "completed"
-        ? "shadow-[inset_0_0_0_1px_var(--color-paper)]"
+    status === "sending" || status === "completed"
+      ? "shadow-[inset_0_0_0_1px_var(--color-paper)]"
         : "text-mute shadow-[inset_0_0_0_1px_var(--color-line)]"
   return (
     <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${style}`}>
-      {status === "sending" && <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ink" />}
+      {status === "sending" && <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-paper" />}
       {label}
     </span>
   )
