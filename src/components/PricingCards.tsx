@@ -44,7 +44,7 @@ export function PricingCards({ locale, t }: Props) {
           const isFree = plan.monthly[currency] === 0
           const href =
             plan.id === "trial"
-              ? `/${locale}/login`
+              ? `/${locale}/login?mode=signup`
               : `/${locale}/dashboard?plan=${plan.id}&period=${period}`
 
           return (

@@ -9,14 +9,14 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/login">): 
   const { lang } = await params
   if (!isLocale(lang)) return {}
   const t = await getDictionary(lang)
-  return { title: t.auth.title, robots: { index: false } }
+  return { title: t.auth.signInTitle, robots: { index: false } }
 }
 
 export default async function LoginPage({ params, searchParams }: PageProps<"/[lang]/login">) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
   const t = await getDictionary(lang)
-  const { error, next } = await searchParams
+  const { mode, next } = await searchParams
 
   return (
     <>
@@ -26,7 +26,7 @@ export default async function LoginPage({ params, searchParams }: PageProps<"/[l
           <LoginPanel
             locale={lang}
             t={t.auth}
-            error={typeof error === "string" ? error : undefined}
+            initialMode={mode === "signup" ? "signup" : "signin"}
             next={typeof next === "string" ? next : undefined}
           />
         </div>

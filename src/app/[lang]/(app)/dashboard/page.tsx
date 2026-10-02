@@ -16,7 +16,7 @@ export default async function DashboardPage({ params, searchParams }: PageProps<
   const { lang } = await params
   if (!isLocale(lang)) notFound()
   const t = await getDictionary(lang)
-  const { plan, period } = await searchParams
+  const { plan, period, gmail, gmail_error } = await searchParams
 
   return (
     <Dashboard
@@ -24,6 +24,7 @@ export default async function DashboardPage({ params, searchParams }: PageProps<
       t={t}
       initialPlan={plan === "standard" || plan === "premium" ? (plan as PaidPlanId) : undefined}
       initialPeriod={period === "year" || period === "month" ? (period as Period) : undefined}
+      gmailResult={gmail === "connected" ? "connected" : typeof gmail_error === "string" ? gmail_error : undefined}
     />
   )
 }

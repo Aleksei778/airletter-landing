@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 
 import { Arrow } from "@/components/Arrow"
-import { api, ApiError, type Campaign, type Me, type Subscription } from "@/lib/api"
+import { api, ApiError, gmailConnectUrl, type Campaign, type GmailStatus, type Me, type Subscription } from "@/lib/api"
 import type { Locale } from "@/lib/i18n/config"
 import type { Dictionary } from "@/lib/i18n/dictionaries/ru"
 import type { PaidPlanId, Period } from "@/lib/plans"
@@ -13,13 +13,13 @@ import { site } from "@/lib/site"
 
 import { Checkout } from "./Checkout"
 
-type Data = { me: Me; sub: Subscription; campaigns: Campaign[] }
+type Data = { me: Me; sub: Subscription; campaigns: Campaign[]; gmail: GmailStatus }
 type LoadResult = Data | "unauthorized" | "error"
 
 async function loadAll(): Promise<LoadResult> {
   try {
-    const [me, sub, list] = await Promise.all([api.me(), api.subscription(), api.campaigns()])
-    return { me, sub, campaigns: list.campaigns }
+    const [me, sub, list, gmail] = await Promise.all([api.me(), api.subscription(), api.campaigns(), api.gmail()])
+    return { me, sub, campaigns: list.campaigns, gmail }
   } catch (e) {
     return e instanceof ApiError && e.status === 401 ? "unauthorized" : "error"
   }
@@ -31,9 +31,11 @@ type Props = {
   // preselected from the pricing page: /dashboard?plan=standard&period=year
   initialPlan?: PaidPlanId
   initialPeriod?: Period
+  // result of returning from Google's consent screen
+  gmailResult?: "connected" | string
 }
 
-export function Dashboard({ locale, t, initialPlan, initialPeriod }: Props) {
+export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }: Props) {
   const router = useRouter()
   const [data, setData] = useState<Data | null>(null)
   const [error, setError] = useState(false)
@@ -91,7 +93,7 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod }: Props) {
   }
   if (!data) return <p className="lede py-20">{d.loading}</p>
 
-  const { me, sub, campaigns } = data
+  const { me, sub, campaigns, gmail } = data
   const dateFmt = new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "en-US", { dateStyle: "medium" })
   const dateTimeFmt = new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "en-US", {
     dateStyle: "medium",
@@ -116,14 +118,14 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod }: Props) {
             <img src={me.picture_url} alt="" className="h-16 w-16 rounded-full grayscale" referrerPolicy="no-referrer" />
           ) : (
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-deep font-head text-xl">
-              {(me.first_name || me.email)[0]?.toUpperCase()}
+              {(me.first_name || me.email || "?")[0]?.toUpperCase()}
             </div>
           )}
           <div>
             <h1 className="font-head text-[clamp(24px,3vw,36px)] font-medium tracking-[-0.03em]">
-              {[me.first_name, me.last_name].filter(Boolean).join(" ") || me.email}
+              {[me.first_name, me.last_name].filter(Boolean).join(" ") || me.email || me.phone}
             </h1>
-            <p className="mt-1 text-mute">{me.email}</p>
+            <p className="mt-1 text-mute">{me.email || me.phone}</p>
           </div>
         </div>
 
@@ -152,6 +154,9 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod }: Props) {
           )}
         </div>
       </section>
+
+      {/* Gmail integration: emails are sent from the connected account */}
+      <GmailCard t={d.gmail} status={gmail} result={gmailResult} onChange={reload} />
 
       {/* totals */}
       <section className="grid grid-cols-3 border-t border-line">
@@ -255,5 +260,59 @@ function StatusBadge({ status, label }: { status: Campaign["status"]; label: str
       {status === "sending" && <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ink" />}
       {label}
     </span>
+  )
+}
+
+function GmailCard({
+  t,
+  status,
+  result,
+  onChange,
+}: {
+  t: Dictionary["dashboard"]["gmail"]
+  status: GmailStatus
+  result?: string
+  onChange: () => void
+}) {
+  const [busy, setBusy] = useState(false)
+  const message =
+    result === "connected" ? t.connected : result ? (t.errors[result as keyof typeof t.errors] ?? t.errors.server_error) : null
+
+  const disconnect = async () => {
+    if (!confirm(t.disconnectConfirm)) return
+    setBusy(true)
+    await api.disconnectGmail().catch(() => {})
+    setBusy(false)
+    onChange()
+  }
+
+  return (
+    <section className="flex flex-col gap-6 border-b border-line pb-14 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p className="text-[13px] text-mute">{t.title}</p>
+        {status.connected ? (
+          <p className="mt-2 text-lg">
+            <span className="text-mute">{t.on} </span>
+            {status.email}
+          </p>
+        ) : (
+          <p className="mt-2 max-w-[56ch] text-lg">{t.off}</p>
+        )}
+        {message && (
+          <p role="status" className="mt-3 border-l border-paper pl-4 text-sm">
+            {message}
+          </p>
+        )}
+      </div>
+      {status.connected ? (
+        <button onClick={disconnect} disabled={busy} className="btn btn-ghost btn-sm shrink-0">
+          {t.disconnect}
+        </button>
+      ) : (
+        <a href={gmailConnectUrl} className="btn shrink-0">
+          {t.connect} <Arrow />
+        </a>
+      )}
+    </section>
   )
 }
