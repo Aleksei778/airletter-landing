@@ -99,6 +99,8 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
     dateStyle: "medium",
     timeStyle: "short",
   })
+  // older backends do not send the list: offer every paid plan as before
+  const purchasable = sub.purchasable ?? (["standard", "premium"] as const).slice()
   const usage = sub.daily_limit > 0 ? Math.min(sub.sent_today / sub.daily_limit, 1) : 0
 
   const cancel = async (c: Campaign) => {
@@ -237,11 +239,11 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
       {/* payment */}
       <section id="upgrade" className="scroll-mt-24 border-t border-line pt-14">
         <h2 className="h-section text-[clamp(28px,4vw,48px)]">{d.upgradeTitle}</h2>
-        {sub.purchasable.length > 0 ? (
+        {purchasable.length > 0 ? (
           <Checkout
             locale={locale}
             t={t}
-            purchasable={sub.purchasable}
+            purchasable={purchasable}
             current={sub.plan}
             initialPlan={initialPlan}
             initialPeriod={initialPeriod}

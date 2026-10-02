@@ -65,7 +65,7 @@ export type Subscription = {
   daily_limit: number
   sent_today: number
   // paid plans that can be bought now: a higher one, or the current one close to its end
-  purchasable: PaidPlanId[]
+  purchasable?: PaidPlanId[]
 }
 
 export type CampaignStatus = "scheduled" | "sending" | "completed" | "paused" | "cancelled"
