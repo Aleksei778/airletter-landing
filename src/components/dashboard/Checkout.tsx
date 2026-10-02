@@ -28,10 +28,23 @@ const paidPlans = plans.filter((p) => p.id !== "trial")
 export function Checkout({ locale, t, initialPlan, initialPeriod }: Props) {
   const [plan, setPlan] = useState<PaidPlanId>(initialPlan ?? "standard")
   const [period, setPeriod] = useState<Period>(initialPeriod ?? "month")
-  const [provider, setProvider] = useState<Provider>(locale === "ru" ? "yookassa" : "paypal")
+  // enabled on the backend; null while loading
+  const [available, setAvailable] = useState<Provider[] | null>(null)
+  const [chosen, setChosen] = useState<Provider | null>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    api
+      .providers()
+      .then((r) => setAvailable(r.providers))
+      .catch(() => setAvailable([]))
+  }, [])
+
+  // default: YooKassa for Russian, Stripe for English, whichever is enabled
+  const preferred: Provider = locale === "ru" ? "yookassa" : "stripe"
+  const provider = chosen ?? (available?.includes(preferred) ? preferred : available?.[0]) ?? preferred
 
   // coming from the pricing page with a chosen plan: bring the form into view
   useEffect(() => {
@@ -47,7 +60,7 @@ export function Checkout({ locale, t, initialPlan, initialPeriod }: Props) {
     setError(false)
     try {
       const { confirmation_url } = await api.createPayment({ plan, period, provider, locale })
-      // YooKassa / PayPal hosted page; they return to /dashboard/payment
+      // YooKassa / Stripe hosted page; they return to /dashboard/payment
       window.location.href = confirmation_url
     } catch {
       setError(true)
@@ -86,9 +99,9 @@ export function Checkout({ locale, t, initialPlan, initialPeriod }: Props) {
         </Fieldset>
 
         <Fieldset legend={t.dashboard.provider}>
-          {(["yookassa", "paypal"] as const).map((p) => (
-            <button key={p} role="radio" aria-checked={provider === p} onClick={() => setProvider(p)} className={option(provider === p)}>
-              {p === "yookassa" ? t.pricing.yookassa : t.pricing.paypal}
+          {(available ?? []).map((p) => (
+            <button key={p} role="radio" aria-checked={provider === p} onClick={() => setChosen(p)} className={option(provider === p)}>
+              {p === "yookassa" ? t.pricing.yookassa : t.pricing.stripe}
             </button>
           ))}
         </Fieldset>
@@ -101,9 +114,13 @@ export function Checkout({ locale, t, initialPlan, initialPeriod }: Props) {
         <p className="mt-2 font-head text-[clamp(36px,4vw,52px)] font-medium tracking-[-0.04em]">
           {formatPrice(amount, currency, locale)}
         </p>
-        <button onClick={pay} disabled={busy} className="btn mt-8 w-full">
-          {t.dashboard.pay} <Arrow />
-        </button>
+        {available?.length === 0 ? (
+          <p className="mt-8 text-sm text-mute">{t.dashboard.payUnavailable}</p>
+        ) : (
+          <button onClick={pay} disabled={busy || !available} className="btn mt-8 w-full">
+            {t.dashboard.pay} <Arrow />
+          </button>
+        )}
         {error && (
           <p role="alert" className="mt-4 text-sm text-mute">
             {t.dashboard.payError}

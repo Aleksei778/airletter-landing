@@ -98,6 +98,8 @@ export const api = {
   disconnectGmail: () => request<GmailStatus>("/integrations/google", { method: "DELETE" }),
 
   me: () => request<Me>("/me"),
+  // payment providers enabled on the backend
+  providers: () => request<{ providers: Provider[] }>("/billing/providers"),
   subscription: () => request<Subscription>("/subscription/current"),
   campaigns: (limit = 50) => request<{ campaigns: Campaign[] }>(`/campaigns?limit=${limit}`),
   cancelCampaign: (id: number) => request<void>(`/campaigns/${id}/cancel`, { method: "POST" }),
