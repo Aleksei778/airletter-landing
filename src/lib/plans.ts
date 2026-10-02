@@ -22,7 +22,7 @@ export type Plan = {
 }
 
 export const plans: Plan[] = [
-  { id: "trial", dailyLimit: 50, monthly: { RUB: 0, USD: 0 } },
+  { id: "trial", dailyLimit: 30, monthly: { RUB: 0, USD: 0 } },
   { id: "standard", dailyLimit: 500, monthly: { RUB: 990, USD: 12 }, popular: true },
   { id: "premium", dailyLimit: 2000, monthly: { RUB: 1990, USD: 22 } },
 ]

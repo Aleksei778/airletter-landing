@@ -2,7 +2,7 @@
 // Auth lives in httpOnly cookies set by the backend; on 401 the access
 // token is refreshed once (shared by concurrent requests) and the request retried.
 
-import type { Period, PlanId, Provider } from "./plans"
+import type { PaidPlanId, Period, PlanId, Provider } from "./plans"
 
 export class ApiError extends Error {
   constructor(
@@ -64,6 +64,8 @@ export type Subscription = {
   end_at: string | null
   daily_limit: number
   sent_today: number
+  // paid plans that can be bought now: a higher one, or the current one close to its end
+  purchasable: PaidPlanId[]
 }
 
 export type CampaignStatus = "scheduled" | "sending" | "completed" | "paused" | "cancelled"
