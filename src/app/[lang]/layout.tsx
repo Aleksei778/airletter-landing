@@ -3,6 +3,7 @@ import { Inter_Tight, Unbounded } from "next/font/google"
 import { notFound } from "next/navigation"
 
 import { getDictionary, isLocale, locales } from "@/lib/i18n"
+import { ogImage } from "@/lib/seo"
 import { site } from "@/lib/site"
 
 import "../globals.css"
@@ -33,8 +34,14 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     title: { default: t.meta.title, template: `%s – ${site.name}` },
     description: t.meta.description,
     // canonical and hreflang are per page: see pageMetadata in lib/seo
-    openGraph: { title: t.meta.title, description: t.meta.description, siteName: site.name, type: "website" },
-    twitter: { card: "summary" },
+    openGraph: {
+      title: t.meta.title,
+      description: t.meta.description,
+      siteName: site.name,
+      type: "website",
+      images: [ogImage(lang)],
+    },
+    twitter: { card: "summary_large_image", images: [ogImage(lang)] },
   }
 }
 

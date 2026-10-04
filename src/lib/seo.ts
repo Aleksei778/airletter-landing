@@ -10,6 +10,14 @@ export type PublicPath = (typeof publicPaths)[number]
 const ogLocale: Record<Locale, string> = { ru: "ru_RU", en: "en_US" }
 
 /**
+ * Link preview from [lang]/opengraph-image. Listed explicitly: a page that
+ * sets its own openGraph does not get the file-based image.
+ */
+export function ogImage(lang: Locale) {
+  return { url: `/${lang}/opengraph-image`, width: 1200, height: 630, alt: site.name, type: "image/png" }
+}
+
+/**
  * Every language version of a page. x-default is the unprefixed path:
  * proxy.ts redirects it by the browser language.
  */
@@ -42,6 +50,7 @@ export function pageMetadata(
       type: "website",
       locale: ogLocale[lang],
       alternateLocale: locales.filter((l) => l !== lang).map((l) => ogLocale[l]),
+      images: [ogImage(lang)],
     },
   }
 }
