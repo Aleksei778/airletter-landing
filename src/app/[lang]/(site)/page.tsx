@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -5,10 +6,42 @@ import { Arrow } from "@/components/Arrow"
 import { FlightScene } from "@/components/FlightScene"
 import { PricingCards } from "@/components/PricingCards"
 import { getDictionary, isLocale } from "@/lib/i18n"
+import { pageMetadata } from "@/lib/seo"
 import { site } from "@/lib/site"
 
 const pad = "px-[clamp(20px,4vw,48px)]"
 const sectionY = "py-[clamp(100px,16vh,180px)]"
+
+export async function generateMetadata({ params }: PageProps<"/[lang]">): Promise<Metadata> {
+  const { lang } = await params
+  if (!isLocale(lang)) return {}
+  const t = await getDictionary(lang)
+  return {
+    ...pageMetadata(lang, "", { title: t.meta.title, description: t.meta.description }),
+    // the home title already names the product, skip the "– Airletter" template
+    title: { absolute: t.meta.title },
+  }
+}
+
+// lets Google show the site name and logo in search results
+function structuredData(lang: string, description: string) {
+  const url = new URL(`/${lang}`, site.url).toString()
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebSite", "@id": `${site.url}/#website`, name: site.name, url, inLanguage: lang },
+      {
+        "@type": "Organization",
+        "@id": `${site.url}/#organization`,
+        name: site.name,
+        url,
+        logo: new URL("/apple-icon.png", site.url).toString(),
+        description,
+        ...(site.supportEmail && { email: site.supportEmail }),
+      },
+    ],
+  }
+}
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params
@@ -17,6 +50,13 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        // JSON.stringify output is safe here: no user input, "<" is escaped below
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData(lang, t.meta.description)).replace(/</g, "\\u003c"),
+        }}
+      />
       <FlightScene />
 
       {/* content sits above the fixed scene and vignette */}
