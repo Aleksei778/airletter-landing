@@ -310,6 +310,11 @@ function GmailCard({
             <span className="text-mute">{t.on} </span>
             {status.email}
           </p>
+        ) : status.bound ? (
+          <p className="mt-2 max-w-[56ch] text-lg">
+            <span className="text-mute">{t.bound} </span>
+            {status.email}
+          </p>
         ) : (
           <p className="mt-2 max-w-[56ch] text-lg">{t.off}</p>
         )}
