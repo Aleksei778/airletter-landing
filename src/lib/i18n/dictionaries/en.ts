@@ -2,9 +2,9 @@ import type { Dictionary } from "./ru"
 
 const en: Dictionary = {
   meta: {
-    title: "Airletter — bulk email from your own Gmail",
+    title: "Airletter — personal email campaigns from your own Gmail",
     description:
-      "Personal bulk campaigns right from Gmail: recipients from Google Sheets, scheduled sending, human pacing and statistics in your dashboard.",
+      "Personal emails to each recipient, sent on your behalf through your own Gmail: recipients from Google Sheets, scheduled sending within Gmail limits and statistics in your dashboard.",
   },
   nav: {
     how: "How it works",
@@ -16,7 +16,7 @@ const en: Dictionary = {
   },
   hero: {
     title: "Send it flying.",
-    text: "Bulk campaigns from your own Gmail. Every letter leaves from an address inboxes already trust.",
+    text: "A separate email to every recipient — on your behalf, through your own Gmail. Airletter only gets permission to send email and never reads your mailbox.",
     install: "Add to Chrome",
     start: "Start for free",
   },
