@@ -5,8 +5,8 @@ import { sellerLine } from "@/lib/seller"
 import { site } from "@/lib/site"
 
 export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
-  // seller details are required by YooKassa, which serves the Russian version
-  const seller = locale === "ru" ? sellerLine() : ""
+  // seller details: required by YooKassa, and Google verification asks for contacts
+  const seller = sellerLine(locale)
 
   return (
     <footer className="relative z-[3] border-t border-deep bg-ink px-[clamp(20px,4vw,48px)] py-7 text-[13px] text-line">

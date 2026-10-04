@@ -10,7 +10,14 @@ export const site = {
   // full name, INN and tax status of the self-employed person
   seller: {
     name: process.env.NEXT_PUBLIC_SELLER_NAME ?? "",
+    // the same name in Latin letters for the English pages
+    nameEn: process.env.NEXT_PUBLIC_SELLER_NAME_EN ?? "",
+    // at least city and country; the privacy policy names the data controller
+    address: process.env.NEXT_PUBLIC_SELLER_ADDRESS ?? "",
     inn: process.env.NEXT_PUBLIC_SELLER_INN ?? "",
     status: process.env.NEXT_PUBLIC_SELLER_STATUS ?? "самозанятый, плательщик НПД",
   },
+  // where the backend and its database run, e.g. "Timeweb Cloud, Russia";
+  // the privacy policy must name it
+  dataHosting: process.env.NEXT_PUBLIC_DATA_HOSTING ?? "",
 }

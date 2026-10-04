@@ -216,7 +216,7 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
                           <div className="h-px bg-paper" style={{ width: `${progress * 100}%` }} />
                         </div>
                       </td>
-                      <td className="py-5 pr-4 tabular-nums text-mute">{c.stats.failed || "—"}</td>
+                      <td className="py-5 pr-4 tabular-nums text-mute">{c.stats.failed || "–"}</td>
                       <td className="py-5 pr-4 whitespace-nowrap text-mute">
                         {dateTimeFmt.format(new Date(c.scheduled_at))}
                       </td>
