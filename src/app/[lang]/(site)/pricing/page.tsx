@@ -3,12 +3,13 @@ import { notFound } from "next/navigation"
 
 import { PricingCards } from "@/components/PricingCards"
 import { getDictionary, isLocale } from "@/lib/i18n"
+import { pageMetadata } from "@/lib/seo"
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/pricing">): Promise<Metadata> {
   const { lang } = await params
   if (!isLocale(lang)) return {}
   const t = await getDictionary(lang)
-  return { title: t.pricing.title, description: t.pricing.lede }
+  return pageMetadata(lang, "/pricing", { title: t.pricing.title, description: t.pricing.lede })
 }
 
 export default async function PricingPage({ params }: PageProps<"/[lang]/pricing">) {

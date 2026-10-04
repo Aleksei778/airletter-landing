@@ -32,11 +32,9 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     metadataBase: new URL(site.url),
     title: { default: t.meta.title, template: `%s – ${site.name}` },
     description: t.meta.description,
-    alternates: {
-      canonical: `/${lang}`,
-      languages: { ru: "/ru", en: "/en" },
-    },
+    // canonical and hreflang are per page: see pageMetadata in lib/seo
     openGraph: { title: t.meta.title, description: t.meta.description, siteName: site.name, type: "website" },
+    twitter: { card: "summary" },
   }
 }
 

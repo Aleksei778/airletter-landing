@@ -4,11 +4,12 @@ import { notFound } from "next/navigation"
 import { LegalPage } from "@/components/LegalPage"
 import { privacy } from "@/content/legal"
 import { isLocale } from "@/lib/i18n"
+import { pageMetadata } from "@/lib/seo"
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/privacy">): Promise<Metadata> {
   const { lang } = await params
   if (!isLocale(lang)) return {}
-  return { title: privacy(lang).title }
+  return pageMetadata(lang, "/privacy", { title: privacy(lang).title })
 }
 
 export default async function PrivacyPage({ params }: PageProps<"/[lang]/privacy">) {
