@@ -125,17 +125,20 @@ const en: Dictionary = {
   dashboard: {
     gmail: {
       title: "Gmail",
-      off: "Connect Gmail – emails will be sent from that address. Airletter only gets permission to send email.",
+      off: "Connect Gmail – emails will be sent from that address. Airletter only gets permission to send email. The address will be bound to your account and cannot be changed later.",
+      bound: "Connect Gmail again. Your account is bound to",
       on: "Emails are sent from",
       connect: "Connect Gmail",
       disconnect: "Disconnect",
-      disconnectConfirm: "Disconnect Gmail? Scheduled campaigns will be paused.",
+      disconnectConfirm: "Disconnect Gmail? Scheduled campaigns will be paused. Only this same address can be connected again.",
       connected: "Gmail is connected.",
       errors: {
         access_denied: "Connection was cancelled.",
         missing_scopes: "Please allow sending email on your behalf.",
         invalid_state: "The connection session expired. Please try again.",
         server_error: "Could not connect Gmail. Please try again.",
+        google_account_mismatch: "Your account is bound to a different Gmail address. Pick it on the Google screen.",
+        google_account_taken: "This Gmail address is already bound to another Airletter account. Sign in to that account or connect a different Gmail.",
       },
     },
     title: "Dashboard",
