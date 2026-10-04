@@ -2,7 +2,7 @@ import type { Dictionary } from "./ru"
 
 const en: Dictionary = {
   meta: {
-    title: "Airletter — personal email campaigns from your own Gmail",
+    title: "Airletter – personal email campaigns from your own Gmail",
     description:
       "Personal emails to each recipient, sent on your behalf through your own Gmail: recipients from Google Sheets, scheduled sending within Gmail limits and statistics in your dashboard.",
   },
@@ -16,7 +16,7 @@ const en: Dictionary = {
   },
   hero: {
     title: "Send it flying.",
-    text: "A separate email to every recipient — on your behalf, through your own Gmail. Airletter only gets permission to send email and never reads your mailbox.",
+    text: "A separate email to every recipient – on your behalf, through your own Gmail. Airletter only gets permission to send email and never reads your mailbox.",
     install: "Add to Chrome",
     start: "Start for free",
   },
@@ -35,9 +35,9 @@ const en: Dictionary = {
       { title: "Your sender, your reputation", text: "Mail goes through the Gmail API from your account, not a shared server pool that spam filters already know." },
       { title: "Sheets as the source", text: "Keep the list where your team already works. Airletter reads the addresses from a Google Sheet at launch." },
       { title: "Human pacing", text: "Sending is spread over time and stays inside Gmail's daily limits." },
-      { title: "Everything Gmail can do", text: "HTML formatting, attachments, signature — write the email as usual, Airletter does the rest." },
+      { title: "Everything Gmail can do", text: "HTML formatting, attachments, signature – write the email as usual, Airletter does the rest." },
       { title: "Scheduling", text: "Pick a date and time in your own timezone. A campaign can be cancelled before it finishes." },
-      { title: "Dashboard with stats", text: "Status of every campaign, how many letters went out and how many failed — in your dashboard on the website." },
+      { title: "Dashboard with stats", text: "Status of every campaign, how many letters went out and how many failed – in your dashboard on the website." },
     ],
     soon: "Coming soon",
     soonItems: ["AI assistant that drafts and polishes your email", "Automatic follow-ups to people who didn't reply"],
@@ -56,7 +56,7 @@ const en: Dictionary = {
     plans: {
       trial: { name: "Trial", note: "10 days, no card", cta: "Start for free" },
       standard: { name: "Standard", note: "For regular campaigns", cta: "Choose Standard" },
-      premium: { name: "Premium", note: "Requires Google Workspace — regular Gmail is limited to about 500 emails a day", cta: "Choose Premium" },
+      premium: { name: "Premium", note: "Requires Google Workspace – regular Gmail is limited to about 500 emails a day", cta: "Choose Premium" },
     },
     features: {
       common: ["Sending via your Gmail", "Scheduling and cancellation", "Dashboard statistics"],
@@ -65,8 +65,8 @@ const en: Dictionary = {
       priority: "Priority support",
     },
     payWith: "Payment methods",
-    yookassa: "YooKassa — Russian cards, SBP",
-    stripe: "Stripe — international cards",
+    yookassa: "YooKassa – Russian cards, SBP",
+    stripe: "Stripe – international cards",
     more: "Pricing details",
   },
   faq: {
@@ -77,7 +77,7 @@ const en: Dictionary = {
       { q: "How many emails can I send per day?", a: "As many as your plan allows, but no more than Gmail's daily limit: about 500 for a regular account and about 2,000 for Google Workspace. When today's limit is reached, the rest go out the next day automatically." },
       { q: "Can I send attachments?", a: "Yes. Write the email in Gmail as usual, attach files and press the Airletter button. Total attachment size is up to 18 MB." },
       { q: "Does Airletter read my email?", a: "No. We only request permission to send email on your behalf. Airletter has no access to your inbox or conversations." },
-      { q: "How do I cancel and delete my data?", a: "Subscriptions do not renew automatically. To delete your account and all data, contact support — we will do it within 30 days." },
+      { q: "How do I cancel and delete my data?", a: "Subscriptions do not renew automatically. To delete your account and all data, contact support – we will do it within 30 days." },
     ],
   },
   cta: {
@@ -125,7 +125,7 @@ const en: Dictionary = {
   dashboard: {
     gmail: {
       title: "Gmail",
-      off: "Connect Gmail — emails will be sent from that address. Airletter only gets permission to send email.",
+      off: "Connect Gmail – emails will be sent from that address. Airletter only gets permission to send email.",
       on: "Emails are sent from",
       connect: "Connect Gmail",
       disconnect: "Disconnect",
@@ -161,8 +161,8 @@ const en: Dictionary = {
       cancelled: "Cancelled",
     },
     pause: {
-      reauth_required: "Gmail access was revoked — sign in again in the extension and sending will continue.",
-      no_subscription: "Your subscription has ended — renew your plan and sending will continue.",
+      reauth_required: "Gmail access was revoked – sign in again in the extension and sending will continue.",
+      no_subscription: "Your subscription has ended – renew your plan and sending will continue.",
     },
     cancel: "Cancel",
     cancelConfirm: "Cancel this campaign? Unsent emails will not go out.",
@@ -174,7 +174,7 @@ const en: Dictionary = {
     payUnavailable: "Payments are temporarily unavailable. Please contact support.",
     renew: "Renewal",
     upgradeNow: "Starts right after payment.",
-    nothingToBuy: "{plan} is active until {until} — renewal opens 7 days before it ends.",
+    nothingToBuy: "{plan} is active until {until} – renewal opens 7 days before it ends.",
   },
   payment: {
     title: "Payment",

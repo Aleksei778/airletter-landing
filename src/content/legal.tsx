@@ -54,8 +54,8 @@ export function privacy(locale: Locale): LegalDoc {
       body: (
         <>
           <p>
-            Политика описывает, какие данные обрабатывает Airletter — сайт, личный кабинет и расширение для Chrome
-            (вместе — «сервис»), зачем, где они хранятся, кому передаются и как их удалить. Отдельно описано, как мы
+            Политика описывает, какие данные обрабатывает Airletter – сайт, личный кабинет и расширение для Chrome
+            (вместе – «сервис»), зачем, где они хранятся, кому передаются и как их удалить. Отдельно описано, как мы
             работаем с данными, полученными от Google.
           </p>
 
@@ -69,23 +69,23 @@ export function privacy(locale: Locale): LegalDoc {
           <h3>Аккаунт Airletter</h3>
           <ul>
             <li>Email и имя, которые вы указываете при регистрации.</li>
-            <li>Пароль — только в виде необратимого хеша (bcrypt); сам пароль мы не храним и не видим.</li>
+            <li>Пароль – только в виде необратимого хеша (bcrypt); сам пароль мы не храним и не видим.</li>
           </ul>
 
-          <h3>Данные Google — только когда вы подключаете Gmail</h3>
+          <h3>Данные Google – только когда вы подключаете Gmail</h3>
           <p>Airletter запрашивает следующие разрешения (scopes) и получает по ним только это:</p>
           <ul>
             <li>
-              <b>openid, userinfo.email, userinfo.profile</b> — адрес Google-аккаунта, имя и фото профиля. Нужны, чтобы
+              <b>openid, userinfo.email, userinfo.profile</b> – адрес Google-аккаунта, имя и фото профиля. Нужны, чтобы
               показать, с какого адреса уходят письма, и подставить его в поле «От».
             </li>
             <li>
-              <b>gmail.send</b> — право отправлять письма от вашего имени. Airletter только отправляет письма, которые
+              <b>gmail.send</b> – право отправлять письма от вашего имени. Airletter только отправляет письма, которые
               вы сами составили и запустили. Мы <b>не читаем</b> входящие и отправленные, не получаем список писем,
-              контакты и метаданные ящика, ничего не изменяем и не удаляем — это разрешение такого доступа не даёт.
+              контакты и метаданные ящика, ничего не изменяем и не удаляем – это разрешение такого доступа не даёт.
             </li>
             <li>
-              <b>spreadsheets.readonly</b> — чтение Google Таблицы, которую вы указали при импорте получателей. Мы
+              <b>spreadsheets.readonly</b> – чтение Google Таблицы, которую вы указали при импорте получателей. Мы
               читаем только заданный вами диапазон в момент импорта и сохраняем из него лишь адреса email из первой
               колонки. Остальное содержимое таблицы не сохраняется. Другие ваши файлы мы не открываем.
             </li>
@@ -109,14 +109,14 @@ export function privacy(locale: Locale): LegalDoc {
           <h3>Оплата</h3>
           <ul>
             <li>
-              Тариф, сумма, валюта, статус и идентификатор платежа. Данные банковских карт мы не получаем и не храним —
+              Тариф, сумма, валюта, статус и идентификатор платежа. Данные банковских карт мы не получаем и не храним –
               их обрабатывают ЮKassa и Stripe на своих страницах.
             </li>
           </ul>
 
           <h3>Технические данные</h3>
           <ul>
-            <li>Журналы сервера: IP-адрес, время и адрес запроса, код ответа — для безопасности и диагностики.</li>
+            <li>Журналы сервера: IP-адрес, время и адрес запроса, код ответа – для безопасности и диагностики.</li>
             <li>
               В браузере расширение хранит токены входа в Airletter и импортированные списки получателей (хранилище
               расширения Chrome, на вашем устройстве).
@@ -148,7 +148,7 @@ export function privacy(locale: Locale): LegalDoc {
             <li>данные Google не продаются и не передаются брокерам данных и рекламным платформам;</li>
             <li>
               данные Google передаются третьим лицам только для работы сервиса (см. раздел 7), по требованию закона или
-              при реорганизации, слиянии или продаже сервиса — и только с вашего предварительного согласия;
+              при реорганизации, слиянии или продаже сервиса – и только с вашего предварительного согласия;
             </li>
             <li>
               люди не читают ваши данные Google, кроме случаев: вы дали явное согласие на конкретный случай (например,
@@ -164,7 +164,7 @@ export function privacy(locale: Locale): LegalDoc {
           <h2>5. Правовые основания</h2>
           <ul>
             <li>исполнение договора (условия использования): аккаунт, отправка кампаний, оплата;</li>
-            <li>ваше согласие: подключение Gmail и выдача разрешений Google — его можно отозвать в любой момент;</li>
+            <li>ваше согласие: подключение Gmail и выдача разрешений Google – его можно отозвать в любой момент;</li>
             <li>законный интерес: безопасность сервиса и предотвращение злоупотреблений (журналы сервера);</li>
             <li>исполнение закона: хранение сведений о платежах и чеков.</li>
           </ul>
@@ -176,32 +176,32 @@ export function privacy(locale: Locale): LegalDoc {
           <h2>6. Где и как хранятся данные</h2>
           <ul>
             <li>Сервер и база данных: {hosting}. Сайт размещён на Vercel.</li>
-            <li>Все соединения — только по HTTPS (TLS).</li>
+            <li>Все соединения – только по HTTPS (TLS).</li>
             <li>
-              OAuth-токены Google шифруются при хранении (AES-256-GCM), пароли хранятся как хеш bcrypt, токены сессий —
+              OAuth-токены Google шифруются при хранении (AES-256-GCM), пароли хранятся как хеш bcrypt, токены сессий –
               в cookie, недоступных скриптам страницы.
             </li>
             <li>Доступ к серверам и базе есть только у оператора.</li>
           </ul>
           <h3>Сроки хранения</h3>
           <ul>
-            <li>аккаунт, кампании и журнал отправки — пока существует аккаунт, либо до удаления по вашему запросу;</li>
+            <li>аккаунт, кампании и журнал отправки – пока существует аккаунт, либо до удаления по вашему запросу;</li>
             <li>
-              токены Google — до отключения Gmail в кабинете или отзыва доступа в аккаунте Google; при отключении токен
+              токены Google – до отключения Gmail в кабинете или отзыва доступа в аккаунте Google; при отключении токен
               сразу отзывается у Google и удаляется;
             </li>
-            <li>сведения о платежах — в течение срока, установленного налоговым законодательством;</li>
-            <li>журналы сервера — ограниченное время, необходимое для безопасности и диагностики.</li>
+            <li>сведения о платежах – в течение срока, установленного налоговым законодательством;</li>
+            <li>журналы сервера – ограниченное время, необходимое для безопасности и диагностики.</li>
           </ul>
 
           <h2>7. Кому мы передаём данные</h2>
           <p>Только поставщикам, без которых сервис не работает, и в объёме, необходимом для их задачи:</p>
           <ul>
-            <li>хостинг сервера и базы данных — {hosting};</li>
-            <li>Vercel Inc. (США) — размещение сайта;</li>
-            <li>Google LLC (США) — отправка писем через Gmail API и чтение выбранных таблиц по вашему поручению;</li>
-            <li>ООО НКО «ЮMoney» (ЮKassa, Россия) — приём платежей в рублях;</li>
-            <li>Stripe, Inc. (США) и Stripe Payments Europe, Ltd. (Ирландия) — приём платежей в долларах.</li>
+            <li>хостинг сервера и базы данных – {hosting};</li>
+            <li>Vercel Inc. (США) – размещение сайта;</li>
+            <li>Google LLC (США) – отправка писем через Gmail API и чтение выбранных таблиц по вашему поручению;</li>
+            <li>ООО НКО «ЮMoney» (ЮKassa, Россия) – приём платежей в рублях;</li>
+            <li>Stripe, Inc. (США) и Stripe Payments Europe, Ltd. (Ирландия) – приём платежей в долларах.</li>
           </ul>
           <p>
             Данные Google не передаются платёжным системам и другим третьим лицам. Аналитических и рекламных сервисов
@@ -225,15 +225,15 @@ export function privacy(locale: Locale): LegalDoc {
           <h2>10. Удаление данных и отзыв доступа</h2>
           <ul>
             <li>
-              <b>Отключить Gmail</b> — кнопкой «Отключить» в личном кабинете. Токен сразу отзывается у Google и
+              <b>Отключить Gmail</b> – кнопкой «Отключить» в личном кабинете. Токен сразу отзывается у Google и
               удаляется у нас.
             </li>
             <li>
-              <b>Отозвать доступ на стороне Google</b> — на странице {permissionsLink}: выберите Airletter и удалите
+              <b>Отозвать доступ на стороне Google</b> – на странице {permissionsLink}: выберите Airletter и удалите
               доступ.
             </li>
             <li>
-              <b>Удалить аккаунт и все данные</b> — напишите на {mail} с адреса аккаунта. Мы удалим аккаунт, кампании,
+              <b>Удалить аккаунт и все данные</b> – напишите на {mail} с адреса аккаунта. Мы удалим аккаунт, кампании,
               вложения, журнал отправки и токены в течение 30 дней и подтвердим удаление. Сведения о платежах хранятся
               столько, сколько требует закон.
             </li>
@@ -243,7 +243,7 @@ export function privacy(locale: Locale): LegalDoc {
           <h2>11. Ваши права</h2>
           <p>
             Вы можете запросить доступ к своим данным и их копию в машиночитаемом виде, исправление, удаление,
-            ограничение обработки, возразить против обработки и отозвать согласие. Запросы — на {mail}, ответ в течение
+            ограничение обработки, возразить против обработки и отозвать согласие. Запросы – на {mail}, ответ в течение
             30 дней. Вы также вправе обратиться с жалобой в Роскомнадзор или в надзорный орган по защите данных в
             стране вашего проживания.
           </p>
@@ -267,8 +267,8 @@ export function privacy(locale: Locale): LegalDoc {
     body: (
       <>
         <p>
-          This policy explains what data Airletter — the website, the dashboard and the Chrome extension (together, the
-          “service”) — processes, why, where it is stored, who it is shared with and how to delete it. A separate section
+          This policy explains what data Airletter – the website, the dashboard and the Chrome extension (together, the
+          “service”) – processes, why, where it is stored, who it is shared with and how to delete it. A separate section
           covers data received from Google.
         </p>
 
@@ -284,20 +284,20 @@ export function privacy(locale: Locale): LegalDoc {
           <li>Your password, stored only as an irreversible bcrypt hash; we never store or see the password itself.</li>
         </ul>
 
-        <h3>Google data — only when you connect Gmail</h3>
+        <h3>Google data – only when you connect Gmail</h3>
         <p>Airletter requests the following scopes and receives only this through them:</p>
         <ul>
           <li>
-            <b>openid, userinfo.email, userinfo.profile</b> — your Google account email address, name and profile
+            <b>openid, userinfo.email, userinfo.profile</b> – your Google account email address, name and profile
             picture. Used to show which address your emails are sent from and to fill in the “From” field.
           </li>
           <li>
-            <b>gmail.send</b> — permission to send email on your behalf. Airletter only sends the emails you have written
+            <b>gmail.send</b> – permission to send email on your behalf. Airletter only sends the emails you have written
             and launched yourself. We <b>do not read</b> your inbox or sent mail, do not receive your message list,
-            contacts or mailbox metadata, and do not modify or delete anything — this scope does not grant such access.
+            contacts or mailbox metadata, and do not modify or delete anything – this scope does not grant such access.
           </li>
           <li>
-            <b>spreadsheets.readonly</b> — reading the Google Sheet you point to when importing recipients. We read only
+            <b>spreadsheets.readonly</b> – reading the Google Sheet you point to when importing recipients. We read only
             the range you specify, at the moment of import, and keep only the email addresses from its first column. The
             rest of the spreadsheet is not stored. We do not open any of your other files.
           </li>
@@ -318,14 +318,14 @@ export function privacy(locale: Locale): LegalDoc {
         <h3>Payments</h3>
         <ul>
           <li>
-            Plan, amount, currency, payment status and ID. We never receive or store card details — YooKassa and Stripe
+            Plan, amount, currency, payment status and ID. We never receive or store card details – YooKassa and Stripe
             process them on their own pages.
           </li>
         </ul>
 
         <h3>Technical data</h3>
         <ul>
-          <li>Server logs: IP address, request time and path, response code — for security and troubleshooting.</li>
+          <li>Server logs: IP address, request time and path, response code – for security and troubleshooting.</li>
           <li>
             The extension keeps your Airletter sign-in tokens and imported recipient lists in Chrome extension storage on
             your device.
@@ -356,7 +356,7 @@ export function privacy(locale: Locale): LegalDoc {
           <li>Google user data is never sold and never shared with data brokers or advertising platforms;</li>
           <li>
             Google user data is transferred to third parties only as needed to provide the service (see section 7), to
-            comply with the law, or as part of a merger, acquisition or sale of the service — and only with your prior
+            comply with the law, or as part of a merger, acquisition or sale of the service – and only with your prior
             consent;
           </li>
           <li>
@@ -373,7 +373,7 @@ export function privacy(locale: Locale): LegalDoc {
         <h2>5. Legal bases (GDPR)</h2>
         <ul>
           <li>performance of a contract (our Terms of Service): your account, sending campaigns, payments;</li>
-          <li>consent: connecting Gmail and granting Google permissions — you can withdraw it at any time;</li>
+          <li>consent: connecting Gmail and granting Google permissions – you can withdraw it at any time;</li>
           <li>legitimate interests: security of the service and abuse prevention (server logs);</li>
           <li>legal obligations: keeping payment and tax records.</li>
         </ul>
@@ -390,23 +390,23 @@ export function privacy(locale: Locale): LegalDoc {
         </ul>
         <h3>Retention</h3>
         <ul>
-          <li>account, campaigns and delivery log — while your account exists, or until you ask us to delete them;</li>
+          <li>account, campaigns and delivery log – while your account exists, or until you ask us to delete them;</li>
           <li>
-            Google tokens — until you disconnect Gmail in the dashboard or revoke access in your Google account; on
+            Google tokens – until you disconnect Gmail in the dashboard or revoke access in your Google account; on
             disconnect the token is revoked with Google and deleted immediately;
           </li>
-          <li>payment records — for the period required by tax law;</li>
-          <li>server logs — for the limited time needed for security and troubleshooting.</li>
+          <li>payment records – for the period required by tax law;</li>
+          <li>server logs – for the limited time needed for security and troubleshooting.</li>
         </ul>
 
         <h2>7. Who we share data with</h2>
         <p>Only with providers the service cannot work without, and only to the extent their task requires:</p>
         <ul>
-          <li>backend and database hosting — {hosting};</li>
-          <li>Vercel Inc. (USA) — website hosting;</li>
-          <li>Google LLC (USA) — sending email via the Gmail API and reading the spreadsheets you choose, on your instruction;</li>
-          <li>YooMoney LLC (YooKassa, Russia) — payments in rubles;</li>
-          <li>Stripe, Inc. (USA) and Stripe Payments Europe, Ltd. (Ireland) — payments in US dollars.</li>
+          <li>backend and database hosting – {hosting};</li>
+          <li>Vercel Inc. (USA) – website hosting;</li>
+          <li>Google LLC (USA) – sending email via the Gmail API and reading the spreadsheets you choose, on your instruction;</li>
+          <li>YooMoney LLC (YooKassa, Russia) – payments in rubles;</li>
+          <li>Stripe, Inc. (USA) and Stripe Payments Europe, Ltd. (Ireland) – payments in US dollars.</li>
         </ul>
         <p>
           Google user data is never shared with payment providers or other third parties. The service uses no analytics
@@ -473,18 +473,18 @@ export function terms(locale: Locale): LegalDoc {
       body: (
         <>
           <p>
-            Эти условия — публичная оферта на предоставление доступа к сервису Airletter. Регистрируясь или оплачивая
+            Эти условия – публичная оферта на предоставление доступа к сервису Airletter. Регистрируясь или оплачивая
             тариф, вы принимаете их полностью. Исполнитель: {operator("ru")}.
           </p>
 
           <h2>1. Сервис</h2>
           <p>
-            Airletter — расширение для Chrome и личный кабинет на сайте. Вы пишете письмо в Gmail, а Airletter
-            отправляет его каждому получателю отдельно — от вашего имени, через ваш аккаунт Gmail (Gmail API), с
+            Airletter – расширение для Chrome и личный кабинет на сайте. Вы пишете письмо в Gmail, а Airletter
+            отправляет его каждому получателю отдельно – от вашего имени, через ваш аккаунт Gmail (Gmail API), с
             паузами и в пределах дневных лимитов. Вы сами выбираете получателей, текст и время отправки.
           </p>
           <p>
-            Airletter — независимый сервис, он не связан с Google LLC и не одобрен ею. Gmail и Google Таблицы —
+            Airletter – независимый сервис, он не связан с Google LLC и не одобрен ею. Gmail и Google Таблицы –
             товарные знаки Google LLC.
           </p>
 
@@ -492,7 +492,7 @@ export function terms(locale: Locale): LegalDoc {
           <ul>
             <li>Для работы нужны аккаунт Airletter, аккаунт Gmail или Google Workspace и браузер Chrome.</li>
             <li>Вы отвечаете за сохранность пароля и за действия, совершённые в вашем аккаунте.</li>
-            <li>Сервисом могут пользоваться лица старше 16 лет; оплачивать тарифы — дееспособные лица.</li>
+            <li>Сервисом могут пользоваться лица старше 16 лет; оплачивать тарифы – дееспособные лица.</li>
           </ul>
 
           <h2>3. Допустимое использование</h2>
@@ -515,7 +515,7 @@ export function terms(locale: Locale): LegalDoc {
           </ul>
           <p>
             При нарушении этих правил или жалобах получателей мы вправе приостановить отправку или заблокировать
-            аккаунт, а в явных случаях — без предупреждения. За неиспользованный период при блокировке за нарушение
+            аккаунт, а в явных случаях – без предупреждения. За неиспользованный период при блокировке за нарушение
             деньги не возвращаются.
           </p>
 
@@ -529,11 +529,11 @@ export function terms(locale: Locale): LegalDoc {
           <h2>5. Тарифы и оплата</h2>
           <ul>
             <li>
-              Пробный период — 10 дней, до 30 писем в день, бесплатно. Импорт из Google Таблиц на пробном периоде
+              Пробный период – 10 дней, до 30 писем в день, бесплатно. Импорт из Google Таблиц на пробном периоде
               недоступен, а в письма добавляется строка «Разослано с помощью Airletter».
             </li>
             <li>
-              Цены платных тарифов указаны на странице «Тарифы». Оплата — заранее за месяц или за год через ЮKassa
+              Цены платных тарифов указаны на странице «Тарифы». Оплата – заранее за месяц или за год через ЮKassa
               (рубли) или Stripe (доллары США). После оплаты исполнитель направляет чек.
             </li>
             <li>
@@ -584,7 +584,7 @@ export function terms(locale: Locale): LegalDoc {
           <h2>9. Применимое право</h2>
           <p>
             К условиям применяется право Российской Федерации. Споры решаются переговорами, а при недостижении
-            согласия — в суде по месту нахождения исполнителя, если закон не предусматривает иного. Права потребителя,
+            согласия – в суде по месту нахождения исполнителя, если закон не предусматривает иного. Права потребителя,
             предоставленные законом страны его проживания, сохраняются.
           </p>
 
@@ -616,7 +616,7 @@ export function terms(locale: Locale): LegalDoc {
         <h2>1. The service</h2>
         <p>
           Airletter is a Chrome extension and a web dashboard. You write an email in Gmail, and Airletter sends it to each
-          recipient individually — on your behalf, through your own Gmail account (Gmail API), paced and within daily
+          recipient individually – on your behalf, through your own Gmail account (Gmail API), paced and within daily
           limits. You choose the recipients, the content and when it is sent.
         </p>
         <p>

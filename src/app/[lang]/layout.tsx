@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
 
   return {
     metadataBase: new URL(site.url),
-    title: { default: t.meta.title, template: `%s — ${site.name}` },
+    title: { default: t.meta.title, template: `%s – ${site.name}` },
     description: t.meta.description,
     alternates: {
       canonical: `/${lang}`,

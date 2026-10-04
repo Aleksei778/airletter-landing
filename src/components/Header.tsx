@@ -26,7 +26,7 @@ export function Header({ locale, t }: { locale: Locale; t: Dictionary }) {
           {t.nav.faq}
         </Link>
         <LangSwitch locale={locale} label={t.lang.label} text={t.lang.switchTo} />
-        <AccountLink locale={locale} login={t.nav.login} dashboard={t.nav.dashboard} />
+        <AccountLink locale={locale} login={t.nav.login} dashboard={t.nav.dashboard} sentToday={t.dashboard.sentToday} />
       </nav>
     </header>
   )
