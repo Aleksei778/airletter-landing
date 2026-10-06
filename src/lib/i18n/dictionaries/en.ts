@@ -15,6 +15,7 @@ const en: Dictionary = {
     dashboard: "Dashboard",
   },
   hero: {
+    eyebrow: "Airletter – personal email campaigns from your own Gmail",
     title: "Send it flying.",
     text: "A separate email to every recipient – on your behalf, through your own Gmail. Airletter only gets permission to send email and never reads your mailbox.",
     install: "Add to Chrome",
@@ -40,7 +41,7 @@ const en: Dictionary = {
       { title: "Dashboard with stats", text: "Status of every campaign, how many letters went out and how many failed – in your dashboard on the website." },
     ],
     soon: "Coming soon",
-    soonItems: ["AI assistant that drafts and polishes your email", "Automatic follow-ups to people who didn't reply"],
+    soonItems: ["Automatic follow-ups to people who didn't reply"],
   },
   pricing: {
     title: "Pricing",
@@ -77,6 +78,7 @@ const en: Dictionary = {
       { q: "How many emails can I send per day?", a: "As many as your plan allows, but no more than Gmail's daily limit: about 500 for a regular account and about 2,000 for Google Workspace. When today's limit is reached, the rest go out the next day automatically." },
       { q: "Can I send attachments?", a: "Yes. Write the email in Gmail as usual, attach files and press the Airletter button. Total attachment size is up to 18 MB." },
       { q: "Does Airletter read my email?", a: "No. We only request permission to send email on your behalf. Airletter has no access to your inbox or conversations." },
+      { q: "What does Airletter use Google APIs for?", a: "Only to send the emails you wrote and launched yourself (Gmail API) and to read addresses from the Google Sheet you choose (Sheets API). Airletter does not generate images or any other content and does not use Google data to train AI models." },
       { q: "How do I cancel and delete my data?", a: "Subscriptions do not renew automatically. To delete your account and all data, contact support – we will do it within 30 days." },
     ],
   },

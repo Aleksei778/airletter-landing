@@ -63,6 +63,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <div className="relative z-[3]">
       {/* hero */}
       <section className={`flex min-h-svh flex-col justify-end ${pad} pb-[clamp(40px,8vh,80px)]`}>
+        <p className="mb-6 text-[clamp(14px,1.2vw,17px)] text-mute">{t.hero.eyebrow}</p>
         <h1 className="h-display max-w-[14ch] text-[clamp(44px,10.5vw,168px)] leading-[0.88]">{t.hero.title}</h1>
         <div className="mt-10 flex flex-wrap items-end justify-between gap-8">
           <p className="max-w-[36ch] text-[clamp(16px,1.4vw,19px)] leading-normal text-mute">{t.hero.text}</p>
