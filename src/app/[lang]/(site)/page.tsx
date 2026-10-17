@@ -79,7 +79,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* how it works */}
-      <section id="how" className={`panel scroll-mt-10 ${pad} ${sectionY}`}>
+      <section id="how" className={`panel scroll-mt-20 ${pad} ${sectionY}`}>
         <div className="mx-auto max-w-[1240px]">
           <h2 className="h-section max-w-[16ch]">{t.route.title}</h2>
           <p className="lede mt-6 max-w-[42ch]">{t.route.lede}</p>
@@ -97,9 +97,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* features */}
-      <section id="features" className={`panel scroll-mt-10 ${pad} ${sectionY}`}>
+      <section id="features" className={`panel scroll-mt-20 ${pad} ${sectionY}`}>
         <div className="mx-auto max-w-[1240px]">
-          <h2 className="h-section max-w-[16ch]">{t.specs.title}</h2>
+          <h2 className="h-section mx-auto max-w-[16ch] text-center">{t.specs.title}</h2>
           <div className="mt-20 grid md:grid-cols-2">
             {t.specs.items.map((item, i) => (
               <div
@@ -127,18 +127,18 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* pricing */}
-      <section id="pricing" className={`panel scroll-mt-10 ${pad} ${sectionY}`}>
+      <section id="pricing" className={`panel scroll-mt-20 ${pad} ${sectionY}`}>
         <div className="mx-auto max-w-[1240px]">
-          <h2 className="h-section">{t.pricing.title}</h2>
-          <p className="lede mt-6 mb-12 max-w-[46ch]">{t.pricing.lede}</p>
+          <h2 className="h-section text-center">{t.pricing.title}</h2>
+          <p className="lede mx-auto mt-6 mb-12 max-w-[46ch] text-center">{t.pricing.lede}</p>
           <PricingCards locale={lang} t={t.pricing} />
         </div>
       </section>
 
       {/* faq */}
-      <section id="faq" className={`panel scroll-mt-10 ${pad} ${sectionY}`}>
+      <section id="faq" className={`panel scroll-mt-20 ${pad} ${sectionY}`}>
         <div className="mx-auto grid max-w-[1240px] gap-12 md:grid-cols-[1fr_2fr]">
-          <h2 className="h-section">{t.faq.title}</h2>
+          <h2 className="h-section text-center">{t.faq.title}</h2>
           <div className="border-t border-line">
             {t.faq.items.map((item) => (
               <details key={item.q} className="group border-b border-line py-6">

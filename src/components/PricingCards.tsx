@@ -21,7 +21,8 @@ export function PricingCards({ locale, t }: Props) {
 
   return (
     <div>
-      <div role="radiogroup" className="inline-flex rounded-full p-1 shadow-[inset_0_0_0_1px_var(--color-line)]">
+      <div className="flex justify-center">
+        <div role="radiogroup" className="inline-flex rounded-full p-1 shadow-[inset_0_0_0_1px_var(--color-line)]">
         {(["month", "year"] as const).map((p) => (
           <button
             key={p}
@@ -36,6 +37,7 @@ export function PricingCards({ locale, t }: Props) {
             {p === "year" && <span className="ml-2 opacity-60">{t.yearlyBadge}</span>}
           </button>
         ))}
+        </div>
       </div>
 
       <div className="mt-12 grid border-t border-line md:grid-cols-3">
