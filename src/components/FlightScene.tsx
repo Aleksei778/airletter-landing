@@ -12,9 +12,6 @@ type Three = typeof THREE_NS
  */
 export function FlightScene() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const altRef = useRef<HTMLElement>(null)
-  const hdgRef = useRef<HTMLElement>(null)
-  const sentRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     let disposed = false
@@ -23,11 +20,7 @@ export function FlightScene() {
     // three.js is loaded lazily so it doesn't block the first paint
     import("three").then((THREE) => {
       if (disposed || !canvasRef.current) return
-      cleanup = start(THREE, canvasRef.current, {
-        alt: altRef.current,
-        hdg: hdgRef.current,
-        sent: sentRef.current,
-      })
+      cleanup = start(THREE, canvasRef.current)
     })
 
     return () => {
@@ -40,16 +33,6 @@ export function FlightScene() {
     <>
       <canvas ref={canvasRef} aria-hidden="true" className="fixed inset-0 z-0 block h-full w-full" />
       <div className="vignette" />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed top-1/2 right-[clamp(20px,4vw,48px)] z-[3] hidden -translate-y-1/2 text-right text-[11px] leading-loose text-mute tabular-nums md:block"
-      >
-        alt <b ref={altRef} className="font-normal text-paper">0000</b>
-        <br />
-        hdg <b ref={hdgRef} className="font-normal text-paper">000</b>
-        <br />
-        sent <b ref={sentRef} className="font-normal text-paper">0</b>
-      </div>
     </>
   )
 }
@@ -59,8 +42,6 @@ function wrap01(t: number): number {
   const r = t % 1
   return r < 0 ? r + 1 : r
 }
-
-type Telemetry = { alt: HTMLElement | null; hdg: HTMLElement | null; sent: HTMLElement | null }
 
 function planeGeometry(THREE: Three) {
   const V = {
@@ -83,7 +64,7 @@ function planeGeometry(THREE: Three) {
   return g
 }
 
-function start(THREE: Three, canvas: HTMLCanvasElement, telemetry: Telemetry): () => void {
+function start(THREE: Three, canvas: HTMLCanvasElement): () => void {
   let renderer: THREE_NS.WebGLRenderer
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
@@ -227,8 +208,6 @@ function start(THREE: Three, canvas: HTMLCanvasElement, telemetry: Telemetry): (
   const tmp = new THREE.Vector3()
   let u = 0
   let bank = 0
-  let sent = 0
-  let frame = 0
   let last = performance.now()
   let raf = 0
   const speedK = reduce ? 0.2 : 1
@@ -292,14 +271,6 @@ function start(THREE: Three, canvas: HTMLCanvasElement, telemetry: Telemetry): (
     camera.position.y += (cy - camera.position.y) * 0.04
     camera.position.z += (cz - camera.position.z) * 0.04
     camera.lookAt(p.x * 0.35, p.y * 0.35 - scrollT * 4, 0)
-
-    if (++frame % 6 === 0) {
-      if (telemetry.alt) telemetry.alt.textContent = String(Math.round((p.y + 12) * 137)).padStart(4, "0")
-      const hdg = ((Math.atan2(tan.x, tan.z) * 180) / Math.PI + 360) % 360
-      if (telemetry.hdg) telemetry.hdg.textContent = String(Math.round(hdg)).padStart(3, "0")
-      if (telemetry.sent) telemetry.sent.textContent = Math.floor(sent).toLocaleString("en")
-    }
-    sent += dt * 3.7 * scrollBoost
 
     renderer.render(scene, camera)
     raf = requestAnimationFrame(tick)
