@@ -79,7 +79,7 @@ export type Campaign = {
   started_at: string | null
   finished_at: string | null
   created_at: string
-  stats: { total: number; pending: number; sent: number; failed: number }
+  stats: { total: number; pending: number; sent: number; failed: number; unsubscribed: number }
 }
 
 export type PaymentStatus = "pending" | "succeeded" | "canceled"
@@ -88,6 +88,8 @@ export type CreatedPayment = { payment_id: string; confirmation_url: string }
 
 // bound: email is the only Google account that can be connected, even after a disconnect
 export type GmailStatus = { connected: boolean; email: string; bound: boolean }
+
+export type UnsubscribeInfo = { email: string; sender: string; unsubscribed: boolean }
 
 export const api = {
   // sign in with an email + password; the backend sets httpOnly cookies
@@ -105,6 +107,9 @@ export const api = {
   subscription: () => request<Subscription>("/subscription/current"),
   campaigns: (limit = 50) => request<{ campaigns: Campaign[] }>(`/campaigns?limit=${limit}`),
   cancelCampaign: (id: number) => request<void>(`/campaigns/${id}/cancel`, { method: "POST" }),
+  // public: the token in the link identifies the recipient
+  unsubscribeInfo: (token: string) => request<UnsubscribeInfo>(`/unsubscribe/${encodeURIComponent(token)}`),
+  unsubscribe: (token: string) => request<unknown>(`/unsubscribe/${encodeURIComponent(token)}`, { method: "POST" }),
   logout: () => request<void>("/auth/logout", { method: "POST" }),
 
   createPayment: (body: { plan: Exclude<PlanId, "trial">; period: Period; provider: Provider; locale: string }) =>

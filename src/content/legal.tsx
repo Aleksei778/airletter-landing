@@ -7,7 +7,7 @@ import { site } from "@/lib/site"
 
 type LegalDoc = { title: string; updated: string; body: ReactNode }
 
-const UPDATED = { ru: "Обновлено 4 октября 2026", en: "Last updated October 4, 2026" }
+const UPDATED = { ru: "Обновлено 22 октября 2026", en: "Last updated October 22, 2026" }
 
 // Unset settings show the variable name, so a missing value is caught before launch
 const setting = (value: string, env: string) => value || <span>[{env}]</span>
@@ -103,6 +103,10 @@ export function privacy(locale: Locale): LegalDoc {
             <li>
               Журнал отправки: статус по каждому получателю, время, идентификатор отправленного письма в Gmail, текст
               ошибки, если письмо не ушло.
+            </li>
+            <li>
+              Стоп-лист: адреса получателей, которые отписались от ваших писем, и время отписки. Он нужен, чтобы этим
+              адресам больше не уходили ваши письма, и хранится, пока существует ваш аккаунт.
             </li>
           </ul>
 
@@ -313,6 +317,10 @@ export function privacy(locale: Locale): LegalDoc {
             Delivery log: status per recipient, time, the Gmail ID of the sent message, and the error text if a message
             failed.
           </li>
+          <li>
+            Stop list: addresses of recipients who unsubscribed from your emails and when they did. It exists so these
+            addresses never get your emails again and is kept for as long as your account exists.
+          </li>
         </ul>
 
         <h3>Payments</h3>
@@ -484,6 +492,10 @@ export function terms(locale: Locale): LegalDoc {
             паузами и в пределах дневных лимитов. Вы сами выбираете получателей, текст и время отправки.
           </p>
           <p>
+            В каждое письмо Airletter добавляет ссылку для отписки и заголовок List-Unsubscribe. Получатель, который
+            отписался, попадает в ваш стоп-лист, и ваши письма через Airletter ему больше не отправляются.
+          </p>
+          <p>
             Airletter – независимый сервис, он не связан с Google LLC и не одобрен ею. Gmail и Google Таблицы –
             товарные знаки Google LLC.
           </p>
@@ -501,7 +513,8 @@ export function terms(locale: Locale): LegalDoc {
             <li>спам: письма тем, кто не давал согласия и с кем у вас нет деловых отношений, купленные и собранные базы;</li>
             <li>фишинг, мошенничество, выдача себя за другое лицо, вредоносные ссылки и вложения;</li>
             <li>незаконный контент, нарушение чужих прав, угрозы и травля;</li>
-            <li>попытки обойти лимиты Gmail, ограничения сервиса или использовать чужие аккаунты.</li>
+            <li>попытки обойти лимиты Gmail, спам-фильтры, ограничения сервиса или использовать чужие аккаунты;</li>
+            <li>скрывать или удалять ссылку для отписки, писать отписавшимся получателям другими способами в обход стоп-листа.</li>
           </ul>
           <p>Вы обязуетесь:</p>
           <ul>
@@ -620,6 +633,10 @@ export function terms(locale: Locale): LegalDoc {
           limits. You choose the recipients, the content and when it is sent.
         </p>
         <p>
+          Airletter adds an unsubscribe link and a List-Unsubscribe header to every email. A recipient who unsubscribes
+          goes on your stop list and gets no more of your emails sent through Airletter.
+        </p>
+        <p>
           Airletter is an independent service. It is not affiliated with, endorsed or sponsored by Google LLC. Gmail and
           Google Sheets are trademarks of Google LLC.
         </p>
@@ -637,7 +654,8 @@ export function terms(locale: Locale): LegalDoc {
           <li>send spam: email people who have not agreed to it and have no business relationship with you, or use bought or scraped lists;</li>
           <li>send phishing, scams or malware, or impersonate anyone;</li>
           <li>send unlawful content, infringe others’ rights, threaten or harass anyone;</li>
-          <li>try to circumvent Gmail limits or service restrictions, or use accounts that are not yours.</li>
+          <li>try to circumvent Gmail limits, spam filters or service restrictions, or use accounts that are not yours;</li>
+          <li>hide or remove the unsubscribe link, or work around the stop list to email recipients who unsubscribed.</li>
         </ul>
         <p>You agree to:</p>
         <ul>

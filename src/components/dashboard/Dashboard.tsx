@@ -184,13 +184,14 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
           </div>
         ) : (
           <div className="mt-10 overflow-x-auto">
-            <table className="w-full min-w-[720px] border-collapse text-left text-[15px]">
+            <table className="w-full min-w-[800px] border-collapse text-left text-[15px]">
               <thead>
                 <tr className="border-b border-line text-[13px] text-mute">
                   <th className="py-3 pr-4 font-normal">{d.columns.subject}</th>
                   <th className="py-3 pr-4 font-normal">{d.columns.status}</th>
                   <th className="py-3 pr-4 font-normal">{d.columns.progress}</th>
                   <th className="py-3 pr-4 font-normal">{d.columns.failed}</th>
+                  <th className="py-3 pr-4 font-normal">{d.columns.unsubscribed}</th>
                   <th className="py-3 pr-4 font-normal">{d.columns.date}</th>
                   <th className="py-3" />
                 </tr>
@@ -217,6 +218,7 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
                         </div>
                       </td>
                       <td className="py-5 pr-4 tabular-nums text-mute">{c.stats.failed || "–"}</td>
+                      <td className="py-5 pr-4 tabular-nums text-mute">{c.stats.unsubscribed || "–"}</td>
                       <td className="py-5 pr-4 whitespace-nowrap text-mute">
                         {dateTimeFmt.format(new Date(c.scheduled_at))}
                       </td>
