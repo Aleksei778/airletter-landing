@@ -22,7 +22,7 @@ const en: Dictionary = {
     start: "Start for free",
   },
   route: {
-    title: "From list to inbox in one flight.",
+    title: "From list to recipient in one flight.",
     lede: "No SMTP servers, no complicated setup. The extension works inside the Gmail you already use.",
     legs: [
       { tag: "Takeoff", title: "Connect Gmail", text: "Sign up, install the extension and connect Gmail. Nothing else to configure." },
@@ -35,7 +35,7 @@ const en: Dictionary = {
     items: [
       { title: "Unsubscribe in every email", text: "Every email has an unsubscribe link and a standard List-Unsubscribe header. Addresses that unsubscribe never get your emails again – Airletter drops them automatically." },
       { title: "Sheets as the source", text: "Keep the list where your team already works. Airletter reads the addresses from a Google Sheet at launch." },
-      { title: "Within Gmail's rules", text: "Sending is spread over time and never exceeds Gmail's daily limits. Airletter is not used to get around Google's sending limits or spam filters." },
+      { title: "Within Gmail's rules", text: "Sending is spread over time and never exceeds Gmail's daily limits. Every email goes out from your own account and is saved in your Sent folder." },
       { title: "Everything Gmail can do", text: "HTML formatting, attachments, signature – write the email as usual, Airletter does the rest." },
       { title: "Scheduling", text: "Pick a date and time in your own timezone. A campaign can be cancelled before it finishes." },
       { title: "Dashboard with stats", text: "Status of every campaign, how many emails went out, how many failed and who unsubscribed – in your dashboard on the website." },
@@ -76,7 +76,6 @@ const en: Dictionary = {
       { q: "What do I need to use Airletter?", a: "A Gmail or Google Workspace account and the Chrome browser with the Airletter extension installed." },
       { q: "From what server are my emails sent?", a: "From Gmail's servers, on your behalf via the Gmail API. Every email sent appears in your Sent folder." },
       { q: "Can recipients unsubscribe?", a: "Yes. Every email has an unsubscribe link, and Gmail and other mail services show their own unsubscribe button next to the sender. An address that unsubscribes goes on your stop list: it gets no more emails from the current or any future campaign." },
-      { q: "Does Airletter help get around spam filters?", a: "No. Airletter sends through the Gmail API from your own account only so you don't have to send the same email by hand. It does not bypass Gmail's limits or spam filters and is not meant for unsolicited mail: only email people who agreed to hear from you or already work with you." },
       { q: "How many emails can I send per day?", a: "As many as your plan allows, but no more than Gmail's daily limit: about 500 for a regular account and about 2,000 for Google Workspace. When today's limit is reached, the rest go out the next day automatically." },
       { q: "Can I send attachments?", a: "Yes. Write the email in Gmail as usual, attach files and press the Airletter button. Total attachment size is up to 18 MB." },
       { q: "Does Airletter read my email?", a: "No. We only request permission to send email on your behalf. Airletter has no access to your inbox or conversations." },
