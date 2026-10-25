@@ -13,7 +13,9 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* scroll is animated by hand (src/lib/smoothScroll.ts); native smooth
+       scroll here would fight with it and make the motion stutter */
+    scroll-behavior: auto;
     color-scheme: dark;
   }
 
@@ -166,6 +168,20 @@
     text-decoration: underline;
     text-underline-offset: 3px;
   }
+
+  /* fades/slides an element up into place the first time it's on screen —
+     see src/components/Reveal.tsx, which toggles .reveal-visible */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* film grain overlay */
@@ -196,5 +212,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .grain { animation: none; }
-  html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
