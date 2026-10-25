@@ -8,6 +8,7 @@ import type { Locale } from "@/lib/i18n/config"
 import { formatPrice, monthlyPrice, plans, totalPrice, type Currency, type Period } from "@/lib/plans"
 
 import { Arrow } from "./Arrow"
+import { Reveal } from "./Reveal"
 
 type Props = {
   locale: Locale
@@ -21,24 +22,24 @@ export function PricingCards({ locale, t }: Props) {
 
   return (
     <div>
-      <div className="flex justify-center">
+      <Reveal as="div" className="flex justify-center">
         <div role="radiogroup" className="inline-flex rounded-full p-1 shadow-[inset_0_0_0_1px_var(--color-line)]">
-        {(["month", "year"] as const).map((p) => (
-          <button
-            key={p}
-            role="radio"
-            aria-checked={period === p}
-            onClick={() => setPeriod(p)}
-            className={`rounded-full px-5 py-2.5 text-sm transition-colors ${
-              period === p ? "bg-paper text-ink" : "text-mute hover:text-paper"
-            }`}
-          >
-            {p === "month" ? t.monthly : t.yearly}
-            {p === "year" && <span className="ml-2 opacity-60">{t.yearlyBadge}</span>}
-          </button>
-        ))}
+          {(["month", "year"] as const).map((p) => (
+            <button
+              key={p}
+              role="radio"
+              aria-checked={period === p}
+              onClick={() => setPeriod(p)}
+              className={`rounded-full px-5 py-2.5 text-sm transition-colors ${
+                period === p ? "bg-paper text-ink" : "text-mute hover:text-paper"
+              }`}
+            >
+              {p === "month" ? t.monthly : t.yearly}
+              {p === "year" && <span className="ml-2 opacity-60">{t.yearlyBadge}</span>}
+            </button>
+          ))}
         </div>
-      </div>
+      </Reveal>
 
       <div className="mt-12 grid border-t border-line md:grid-cols-3">
         {plans.map((plan, i) => {
@@ -50,8 +51,10 @@ export function PricingCards({ locale, t }: Props) {
               : `/${locale}/dashboard?plan=${plan.id}&period=${period}`
 
           return (
-            <div
+            <Reveal
               key={plan.id}
+              as="div"
+              delay={i * 100}
               className={`relative flex flex-col py-10 md:px-8 ${i > 0 ? "border-t border-line md:border-t-0 md:border-l" : ""} ${i === 0 ? "md:pl-0" : ""}`}
             >
               <span className="absolute -top-1 left-0 h-[7px] w-[7px] rounded-full bg-paper md:left-auto" />
@@ -88,14 +91,14 @@ export function PricingCards({ locale, t }: Props) {
               <Link href={href} className={`btn mt-10 ${plan.popular ? "" : "btn-ghost"}`}>
                 {copy.cta} <Arrow />
               </Link>
-            </div>
+            </Reveal>
           )
         })}
       </div>
 
-      <p className="mt-10 text-sm text-mute">
+      <Reveal as="p" delay={300} className="mt-10 text-sm text-mute">
         {t.payWith}: <span className="text-paper">{t.yookassa}</span> · <span className="text-paper">{t.stripe}</span>
-      </p>
+      </Reveal>
     </div>
   )
 }
