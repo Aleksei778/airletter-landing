@@ -86,8 +86,8 @@ export type PaymentStatus = "pending" | "succeeded" | "canceled"
 
 export type CreatedPayment = { payment_id: string; confirmation_url: string }
 
-// bound: email is the only Google account that can be connected, even after a disconnect
-export type GmailStatus = { connected: boolean; email: string; bound: boolean }
+// email: the connected address, or the sign-up email, the only one that can be connected
+export type GmailStatus = { connected: boolean; email: string }
 
 export type UnsubscribeInfo = { email: string; sender: string; unsubscribed: boolean }
 
