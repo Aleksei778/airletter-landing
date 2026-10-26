@@ -4,6 +4,9 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   // Chrome Web Store page of the extension (fixed link, ignores env override)
   extensionUrl: "https://chrome.google.com/webstore/detail/ignncmjpagfeohmkifmfiamcjcgckiak",
+  // the Google Picker page reports the chosen spreadsheet to this extension;
+  // set NEXT_PUBLIC_EXTENSION_ID to the ID of an unpacked build in development
+  extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID || "ignncmjpagfeohmkifmfiamcjcgckiak",
   // must be set before launch: legal pages and the footer point to it
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "",
   // Seller details YooKassa requires on the site (Russian version):

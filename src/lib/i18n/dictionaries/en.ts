@@ -190,6 +190,18 @@ const en: Dictionary = {
     unknown: "Could not check the payment status.",
     back: "To dashboard",
   },
+  sheetsPicker: {
+    title: "Choose a spreadsheet",
+    hint: "Choose the Google Sheet with your recipients' addresses. Airletter gets access to that file only – it can't see anything else in your Drive.",
+    loading: "Opening Google Drive…",
+    picked: "Done: “{name}”. This window will close – the addresses are loading in Gmail.",
+    cancelled: "No spreadsheet chosen.",
+    invalid: "This link has expired. Go back to Gmail and start the import again.",
+    reauth: "Google access needs a refresh: sign in to the Airletter extension again.",
+    error: "Couldn't open Google Drive. Please try again.",
+    reopen: "Choose a spreadsheet",
+    close: "Close window",
+  },
   unsubscribe: {
     title: "Unsubscribe",
     question: "Stop receiving emails from {sender} at {email}?",
