@@ -85,9 +85,10 @@ export function privacy(locale: Locale): LegalDoc {
               контакты и метаданные ящика, ничего не изменяем и не удаляем – это разрешение такого доступа не даёт.
             </li>
             <li>
-              <b>spreadsheets.readonly</b> – чтение Google Таблицы, которую вы указали при импорте получателей. Мы
-              читаем только заданный вами диапазон в момент импорта и сохраняем из него лишь адреса email из первой
-              колонки. Остальное содержимое таблицы не сохраняется. Другие ваши файлы мы не открываем.
+              <b>drive.file</b> – доступ только к тем файлам Google Диска, которые вы сами выбрали в окне выбора
+              Google при импорте получателей. Остальные файлы на вашем Диске Airletter не видны. Из выбранной таблицы
+              мы читаем только заданный вами диапазон в момент импорта и сохраняем из него лишь адреса email из первой
+              колонки. Остальное содержимое таблицы не сохраняется, файлы мы не изменяем.
             </li>
             <li>
               <b>OAuth-токены</b> Google, которые позволяют выполнять действия выше. Хранятся в зашифрованном виде.
@@ -301,9 +302,10 @@ export function privacy(locale: Locale): LegalDoc {
             contacts or mailbox metadata, and do not modify or delete anything – this scope does not grant such access.
           </li>
           <li>
-            <b>spreadsheets.readonly</b> – reading the Google Sheet you point to when importing recipients. We read only
-            the range you specify, at the moment of import, and keep only the email addresses from its first column. The
-            rest of the spreadsheet is not stored. We do not open any of your other files.
+            <b>drive.file</b> – access only to the Google Drive files you choose yourself in Google’s file picker
+            when importing recipients. Airletter cannot see any other files in your Drive. From the chosen spreadsheet we
+            read only the range you specify, at the moment of import, and keep only the email addresses from its first
+            column. The rest of the spreadsheet is not stored, and we do not modify your files.
           </li>
           <li>
             <b>Google OAuth tokens</b> that allow the actions above. Stored encrypted.

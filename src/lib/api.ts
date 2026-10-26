@@ -110,6 +110,12 @@ export const api = {
   // public: the token in the link identifies the recipient
   unsubscribeInfo: (token: string) => request<UnsubscribeInfo>(`/unsubscribe/${encodeURIComponent(token)}`),
   unsubscribe: (token: string) => request<unknown>(`/unsubscribe/${encodeURIComponent(token)}`, { method: "POST" }),
+  // the one-time code comes from the extension; app_id is the Cloud project number
+  pickerToken: (code: string) =>
+    request<{ access_token: string; api_key: string; app_id: string }>("/sheets/picker/token", {
+      method: "POST",
+      body: JSON.stringify({ code }),
+    }),
   logout: () => request<void>("/auth/logout", { method: "POST" }),
 
   createPayment: (body: { plan: Exclude<PlanId, "trial">; period: Period; provider: Provider; locale: string }) =>
