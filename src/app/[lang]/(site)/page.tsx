@@ -119,6 +119,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               </Reveal>
             ))}
           </ol>
+          <Reveal className="mt-16 max-w-[68ch] border-l border-paper pl-6">
+            <h3 className="font-head text-base font-medium tracking-[-0.02em]">{t.route.notice.title}</h3>
+            <p className="mt-3 text-[15px] leading-relaxed text-mute">{t.route.notice.text}</p>
+          </Reveal>
         </div>
       </section>
 

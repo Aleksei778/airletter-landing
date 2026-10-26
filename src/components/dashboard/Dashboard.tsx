@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 
 import { Arrow } from "@/components/Arrow"
+import { ConfirmDialog } from "@/components/ConfirmDialog"
 import { api, ApiError, gmailConnectUrl, type Campaign, type GmailStatus, type Me, type Subscription } from "@/lib/api"
 import type { Locale } from "@/lib/i18n/config"
 import type { Dictionary } from "@/lib/i18n/dictionaries/ru"
@@ -40,6 +41,9 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
   const [data, setData] = useState<Data | null>(null)
   const [error, setError] = useState(false)
   const d = t.dashboard
+
+  const [cancelling, setCancelling] = useState<Campaign | null>(null)
+  const [cancelBusy, setCancelBusy] = useState(false)
 
   const [reloadKey, setReloadKey] = useState(0)
   const reload = () => setReloadKey((k) => k + 1)
@@ -103,9 +107,12 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
   const purchasable = sub.purchasable ?? (["standard", "premium"] as const).slice()
   const usage = sub.daily_limit > 0 ? Math.min(sub.sent_today / sub.daily_limit, 1) : 0
 
-  const cancel = async (c: Campaign) => {
-    if (!confirm(d.cancelConfirm)) return
-    await api.cancelCampaign(c.id).catch(() => {})
+  const cancel = async () => {
+    if (!cancelling) return
+    setCancelBusy(true)
+    await api.cancelCampaign(cancelling.id).catch(() => {})
+    setCancelBusy(false)
+    setCancelling(null)
     reload()
   }
 
@@ -224,7 +231,7 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
                       </td>
                       <td className="py-5 text-right">
                         {cancellable && (
-                          <button onClick={() => cancel(c)} className="text-sm text-mute underline-offset-4 hover:text-paper hover:underline">
+                          <button onClick={() => setCancelling(c)} className="text-sm text-mute underline-offset-4 hover:text-paper hover:underline">
                             {d.cancel}
                           </button>
                         )}
@@ -263,6 +270,17 @@ export function Dashboard({ locale, t, initialPlan, initialPeriod, gmailResult }
           </Link>
         </p>
       </section>
+
+      <ConfirmDialog
+        open={cancelling !== null}
+        title={d.cancelTitle}
+        text={d.cancelConfirm}
+        confirmLabel={d.cancel}
+        cancelLabel={d.cancelKeep}
+        busy={cancelBusy}
+        onConfirm={cancel}
+        onClose={() => setCancelling(null)}
+      />
     </div>
   )
 }
@@ -295,11 +313,12 @@ function GmailCard({
   const message =
     result === "connected" ? t.connected : result ? (t.errors[result as keyof typeof t.errors] ?? t.errors.server_error) : null
 
+  const [asking, setAsking] = useState(false)
   const disconnect = async () => {
-    if (!confirm(t.disconnectConfirm)) return
     setBusy(true)
     await api.disconnectGmail().catch(() => {})
     setBusy(false)
+    setAsking(false)
     onChange()
   }
 
@@ -312,13 +331,10 @@ function GmailCard({
             <span className="text-mute">{t.on} </span>
             {status.email}
           </p>
-        ) : status.bound ? (
-          <p className="mt-2 max-w-[56ch] text-lg">
-            <span className="text-mute">{t.bound} </span>
-            {status.email}
-          </p>
         ) : (
-          <p className="mt-2 max-w-[56ch] text-lg">{t.off}</p>
+          <p className="mt-2 max-w-[56ch] text-lg">
+            {t.off} {status.email}.
+          </p>
         )}
         {message && (
           <p role="status" className="mt-3 border-l border-paper pl-4 text-sm">
@@ -327,7 +343,7 @@ function GmailCard({
         )}
       </div>
       {status.connected ? (
-        <button onClick={disconnect} disabled={busy} className="btn btn-ghost btn-sm shrink-0">
+        <button onClick={() => setAsking(true)} disabled={busy} className="btn btn-ghost btn-sm shrink-0">
           {t.disconnect}
         </button>
       ) : (
@@ -335,6 +351,16 @@ function GmailCard({
           {t.connect} <Arrow />
         </a>
       )}
+      <ConfirmDialog
+        open={asking}
+        title={t.disconnectTitle}
+        text={t.disconnectConfirm}
+        confirmLabel={t.disconnect}
+        cancelLabel={t.keep}
+        busy={busy}
+        onConfirm={disconnect}
+        onClose={() => setAsking(false)}
+      />
     </section>
   )
 }
