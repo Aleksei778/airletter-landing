@@ -7,7 +7,7 @@ import { site } from "@/lib/site"
 
 type LegalDoc = { title: string; updated: string; body: ReactNode }
 
-const UPDATED = { ru: "Обновлено 22 октября 2026", en: "Last updated October 22, 2026" }
+const UPDATED = { ru: "Обновлено 3 ноября 2026", en: "Last updated November 3, 2026" }
 
 // Unset settings show the variable name, so a missing value is caught before launch
 const setting = (value: string, env: string) => value || <span>[{env}]</span>
@@ -545,7 +545,10 @@ export function terms(locale: Locale): LegalDoc {
           <ul>
             <li>
               Пробный период – 10 дней, до 30 писем в день, бесплатно. Импорт из Google Таблиц на пробном периоде
-              недоступен, а в письма добавляется строка «Разослано с помощью Airletter».
+              недоступен.
+            </li>
+            <li>
+              На всех тарифах в письма добавляется строка «Sent with Airletter».
             </li>
             <li>
               Цены платных тарифов указаны на странице «Тарифы». Оплата – заранее за месяц или за год через ЮKassa
@@ -685,7 +688,9 @@ export function terms(locale: Locale): LegalDoc {
         <ul>
           <li>
             The trial lasts 10 days with up to 30 emails a day, free of charge. Google Sheets import is not available on
-            the trial, and emails carry a “Sent with Airletter” line.
+            the trial.
+          </li>
+          <li>Emails sent on every plan carry a “Sent with Airletter” line.
           </li>
           <li>
             Paid plan prices are listed on the Pricing page. Plans are prepaid for a month or a year via YooKassa (rubles)
