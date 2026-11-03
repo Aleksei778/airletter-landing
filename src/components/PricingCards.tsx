@@ -84,7 +84,7 @@ export function PricingCards({ locale, t }: Props) {
                     {f}
                   </li>
                 ))}
-                {isFree && <li className="text-mute">{t.features.trialFooter}</li>}
+                <li className="text-mute">{t.features.footer}</li>
                 {plan.id === "premium" && <li className="text-mute">{t.features.priority}</li>}
               </ul>
 

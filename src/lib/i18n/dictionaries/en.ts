@@ -65,8 +65,8 @@ const en: Dictionary = {
     },
     features: {
       common: ["Sending via your Gmail", "Scheduling and cancellation", "Dashboard statistics"],
-      paid: ["Recipients from Google Sheets", "No Airletter footer"],
-      trialFooter: "\"Sent with Airletter\" footer in emails",
+      paid: ["Recipients from Google Sheets"],
+      footer: "\"Sent with Airletter\" footer in emails",
       priority: "Priority support",
     },
     payWith: "Payment methods",

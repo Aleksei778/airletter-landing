@@ -65,8 +65,8 @@ const ru = {
     },
     features: {
       common: ["Отправка через ваш Gmail", "Расписание и отмена", "Статистика в кабинете"],
-      paid: ["Получатели из Google Таблиц", "Без подписи Airletter"],
-      trialFooter: "Подпись «Разослано с помощью Airletter» в письмах",
+      paid: ["Получатели из Google Таблиц"],
+      footer: "Подпись «Sent with Airletter» в письмах",
       priority: "Приоритетная поддержка",
     },
     payWith: "Способы оплаты",
